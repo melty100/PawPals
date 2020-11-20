@@ -6,7 +6,7 @@ import { Container} from 'react-bootstrap'
 import HeroSection from './components/HeroSection'
 import Header from './components/Header'
 import Footer from './components/Footer'
-import HomePage from './pages/HomePage'
+import HomePage from './pages/Homepage/HomePage'
 import QuestionPage from './pages/QuestionPage'
 
 
