@@ -9,6 +9,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import HomePage from './pages/HomePage'
 import QuestionPage from './pages/QuestionPage'
+import { Login } from './components/login' 
 
 
 const App = () => {
@@ -19,12 +20,13 @@ const App = () => {
       <Router>
         {/* <Navbar /> */}
         <Header />
-        <HeroSection/> 
+        {/* <HeroSection/> */}
       
         <main>
           <Container>
             <Route path="/" component={HomePage} exact/>
             <Route path="question/:id" component={QuestionPage} />
+            <Route path='/login' component={Login} exact/>
           </Container>
         </main>
         <Footer />
