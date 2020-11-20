@@ -7,7 +7,7 @@ class App extends Component {
        this.state ={users: []};
    }
    componentDidMount() {
-          fetch('/users')
+          fetch('/testing')
             .then(res => {
                 console.log(res);
                 return res.json()
@@ -22,7 +22,7 @@ class App extends Component {
             <div className="App">
                 <h1>Users</h1>
                 {this.state.users.map(user =>
-                <div key={user.id}>user: {user.name} Password: {user.password}</div>
+                <div key={user.id}>user: {user.firstName} Chips: {user.chips}</div>
               )}
             </div>
         );
