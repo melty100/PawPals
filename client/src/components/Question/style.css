@@ -1,0 +1,16 @@
+.questionCard {
+    background-color: #F8F8F8;
+    
+}
+
+.questionTitle {
+    font-size: 35px;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 15px;
+}
+
+.questionText {
+    display: flex;
+    justify-content: center;
+}
