@@ -1,13 +1,17 @@
 import React from 'react'
-import { LinkContainer } from 'react-router-bootstrap'
-import { Navbar, Nav, Container, Form, FormControl, Button } from 'react-bootstrap';
+// import { LinkContainer } from 'react-router-bootstrap'
+import { Link } from 'react-router-dom'
+import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import "./style.css"
 
 const Header = () => {
     return (
         <>
             <Navbar className="header__navbar" variant="dark">
-                <Navbar.Brand as='div' href="#home">Navbar</Navbar.Brand>
+                <Link to="/">
+
+                <Navbar.Brand as='div' href="#home">Project 3</Navbar.Brand>
+                </Link>
                 <Nav as='div' className="mr-auto">
                     <Nav.Link href="#features">Questions</Nav.Link>
                     <Nav.Link href="#pricing">My Profile</Nav.Link>

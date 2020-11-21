@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "root",
-    "database": "blackjack_db",
+    "database": "petquora",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },

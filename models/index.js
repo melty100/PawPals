@@ -34,4 +34,27 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+db.User = require("./user")(sequelize, Sequelize);
+db.Comments = require("./comment")(sequelize, Sequelize);
+db.Question = require("./question")(sequelize, Sequelize);
+
+db.User.hasMany(db.Question);
+db.Question.belongsTo(db.User);
+
+db.Question.hasMany(db.Comments);
+db.Comments.belongsTo(db.Question);
+
+db.User.hasMany(db.Comments);
+db.Comments.belongsTo(db.User);
+
+db.Comments.hasOne(db.Comments, {
+    foreignKey: 'nestedComment_id'
+  });
+db.Comments.belongsTo(db.Comments, {
+  foreignKey: 'nestedComment_id',
+  allowNull: true
+});
+
 module.exports = db;
+
+

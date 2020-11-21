@@ -1,4 +1,5 @@
-import { Row, Col} from 'react-bootstrap'
+import { Row, Col, Container } from 'react-bootstrap'
+import HeroSection from '../../components/HeroSection/'
 import Question from '../../components/Question/Question'
 import Topics from '../../components/Topics/Topics'
 import questions from '../../questions'
@@ -9,20 +10,26 @@ const HomePage = () => {
 
     return (
         <>
-            <div className="home_container">
+            <HeroSection />
+            {/* <div className="home_container"> */}
+            <Container>
                 <Row>
-                    {questions.map(question => (
-                        <Col key={question.id} sm={8}>
-                            <Question question={question} />
-                        </Col>
-                    ))}
+                    <Col  sm={8}>
+                        {questions.map(question => (
+
+                            <Question key={question.id} question={question} />
+
+                        ))}
+                    </Col>
                     {/* <div className="topic_contianer"> */}
                     <Col sm={4}>
                         <Topics />
                     </Col>
                     {/* </div> */}
                 </Row>
-            </div>
+            </Container>
+
+
         </>
     )
 }
