@@ -1,5 +1,7 @@
 var createError = require('http-errors');
 var express = require('express');
+var session = require("express-session");
+var passport = require("./config/passport");
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -42,6 +44,18 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+//Passport setup
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 db.sequelize.sync().then(function() {
   app.listen(PORT, function() {
