@@ -1,5 +1,5 @@
 import React from 'react';
-import loginImg from './login.svg';
+import loginImg from './loginheader.jpg';
 
 export class Login extends React.Component {
     constructor(props) {
@@ -8,7 +8,7 @@ export class Login extends React.Component {
 
     render() {
         return <div className='base-container'>
-            <div className='header'>Login</div>
+            <div className='header'><h2>Login</h2></div>
             <div className='content'>
                 <div className='image'>
                     <img src={loginImg}/>
@@ -25,8 +25,8 @@ export class Login extends React.Component {
                 </div>
             </div>
             <div className='footer'>
-                <button type='button' className='btn'>Login</button>
+                <button type='button' className='btn btn-success'>Login</button>
             </div>
         </div>
     }
-} 
+}  
