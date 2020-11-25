@@ -1,6 +1,7 @@
 
 import React from 'react'
 import './App.css'
+import './'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { Container} from 'react-bootstrap'
 // import Navbar from './components/Navbar';
@@ -9,8 +10,8 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import HomePage from './pages/Homepage/HomePage'
 import QuestionPage from './pages/QuestionPage'
-// import { Login } from './components/login' 
-
+import { Login } from './components/login'
+//import { Login } from './components/login/login'//
 
 const App = () => {
 
@@ -27,6 +28,8 @@ const App = () => {
           
             <Route path="/question/:id" component={QuestionPage} />
             {/* <Route path='/login' component={Login} exact/> */}
+
+            <Login path='/' component={Login} exact/>
           </Container>
         </main>
         <Footer />
