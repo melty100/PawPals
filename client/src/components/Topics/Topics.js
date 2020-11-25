@@ -1,9 +1,10 @@
 import React from 'react'
-import { Card, ListGroup} from 'react-bootstrap'
+import { Card, ListGroup, Container} from 'react-bootstrap'
 import './style.css'
 
 const Topics = () => {
     return (
+        <Container className='topicContainer'>
         <Card className='my-3 p-3 rounded topic__card'>
             <Card.Title>Topics</Card.Title>
             <Card.Body>
@@ -23,6 +24,7 @@ const Topics = () => {
             </ListGroup>
             </Card.Body>
         </Card>
+        </Container>
     )
 }
 

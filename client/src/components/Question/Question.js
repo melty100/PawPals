@@ -1,16 +1,18 @@
 import React from 'react'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Card } from 'react-bootstrap'
 import './style.css'
 
-const Question = () => {
+const Question = ({ question }) => {
     return (
         <Card className='my-3 p-3 rounded questionCard' >
             <Card.Body>
-                
-            <Card.Title className="questionTitle">What should I feed my puppy?</Card.Title>
-                <Card.Text className="questionText">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                <Link to={`/question/${question.id}`}>
+
+                <Card.Title as='div'className="questionTitle">{question.title}</Card.Title>
+                </Link>
+                <Card.Text as='div' className="questionText">
+                    {question.content}
                 </Card.Text>
             </Card.Body>
         </Card>
