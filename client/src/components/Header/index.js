@@ -2,7 +2,7 @@ import React from 'react'
 // import { LinkContainer } from 'react-router-bootstrap'
 import { Link } from 'react-router-dom'
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
-import "./style.css"
+import "./style.css";
 
 const Header = () => {
     return (
