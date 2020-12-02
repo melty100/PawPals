@@ -13,8 +13,11 @@ const Header = () => {
                 <Navbar.Brand as='div' href="#home">Project 3</Navbar.Brand>
                 </Link>
                 <Nav as='div' className="mr-auto">
-                    <Nav.Link href="#features">Questions</Nav.Link>
-                    <Nav.Link href="#pricing">My Profile</Nav.Link>
+                    <Link to="myprofile">
+                        <Navbar.Text>My Profile</Navbar.Text>
+                    
+                    </Link>
+                    
                 </Nav>
                 <Form as='div' inline>
                     <FormControl type="text" placeholder="Search" className="mr-sm-2" />
