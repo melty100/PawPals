@@ -45,26 +45,23 @@ const HeroSection = () => {
                             <Form.Label>Anymore information you would like to add?</Form.Label>
                             <Form.Control as="textarea" rows={3} />
                         </Form.Group>
-                        {/* <Form.Group controlId="exampleForm.ControlSelect1">
+                        <Form.Group controlId="exampleForm.ControlSelect1">
                             <Form.Label>Topic</Form.Label>
                             <Form.Control as="select">
                                 <option>Feeding</option>
                                 <option>Potty Training</option>
                                 <option>Exercise</option>
-                                <option>Behavior Issues</option>
+                                <option>Training</option>
+                                <option>Toys</option>
+                                <option>Housing</option>
                                 <option>Small Animals</option>
-                            </Form.Control>
-                        </Form.Group> */}
-                        <Form.Group controlId="exampleForm.ControlSelect2">
-                            <Form.Label>Topics</Form.Label>
-                            <Form.Control as="select" multiple>
-                                <option>Feeding</option>
-                                <option>Potty Training</option>
-                                <option>Exercise</option>
-                                <option>Behavior Issures</option>
-                                <option>Small Animals</option>
+                                <option>Large Animals</option>
+                                <option>Reptiles</option>
+                                <option>Amphibians</option>
+                                <option>Exotic Pets</option>
                             </Form.Control>
                         </Form.Group>
+                        
 
 
                     </Modal.Body>

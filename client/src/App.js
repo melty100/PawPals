@@ -11,9 +11,15 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import HomePage from './pages/Homepage/HomePage'
 import QuestionPage from './pages/QuestionPage'
+
 import { Login } from './components/login/login'
 import { Register } from './components/login/register'
 //import { Login } from './components/login/login'//
+
+import MyProfile from './pages/MyProfile/index.js'
+
+
+
 
 const App = () => {
 
@@ -29,9 +35,9 @@ const App = () => {
           <Container>
           
             <Route path="/question/:id" component={QuestionPage} />
-            {/* <Route path='/login' component={Login} exact/> */}
+            <Route path="/myprofile" component={MyProfile} />
 
-            <Login path='/' component={Login} exact/>
+            <Route path='/login' component={Login} exact/>
           </Container>
         </main>
         <Footer />
