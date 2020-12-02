@@ -9,6 +9,8 @@ const PORT = process.env.PORT || 8080;
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var questionsRouter = require('./routes/questions');
+var commentsRouter = require('./routes/comments');
 
 const cors = require('cors')
 var db = require("./models");
@@ -28,6 +30,8 @@ app.use(cors());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/questions', questionsRouter);
+app.use('/comments', commentsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
