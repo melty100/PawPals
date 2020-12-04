@@ -1,4 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
+import { useStoreContext } from "../../utils/GlobalState";
+import { ADD_POST, LOADING } from "../../utils/actions";
+import API from "../../utils/API";
 import HeroImage from '../../images/dogBG3.jpg'
 import { Modal, Form } from 'react-bootstrap'
 import { Button } from '../ButtonElement'
@@ -13,6 +16,33 @@ const HeroSection = () => {
     const onHover = () => {
         setHover(!hover)
     }
+
+    const questionRef = useRef();
+    // const contentRef = useRef();
+    // const userRef = useRef();
+    const topicRef = useRef();
+    const [state, dispatch] = useStoreContext();
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        dispatch({ type: LOADING });
+        API.addPost({
+            question: questionRef.current.value,
+            // content: content.current.valaue,
+            topic: topicRef.current.value,
+            // user: userRef.current.value
+        })
+            .then(result => {
+                dispatch({
+                    type: ADD_POST,
+                    post: result.data
+                });
+            })
+            .catch(err => console.log(err));
+
+        questionRef.current.value = "";
+        topicRef.current.value = "";
+    };
 
     return (
         <>
@@ -34,12 +64,12 @@ const HeroSection = () => {
                 <Modal.Header closeButton>
                     <Modal.Title>Ask the Project 3 community a question!</Modal.Title>
                 </Modal.Header>
-                <Form>
+                <Form onSubmit={handleSubmit}>
                     <Modal.Body>
 
                         <Form.Group controlId="UserQuestionInput">
                             <Form.Label>What would you like to ask?</Form.Label>
-                            <Form.Control type="text" />
+                            <Form.Control type="text" required ref={questionRef}/>
                         </Form.Group>
                         <Form.Group controlId="exampleForm.ControlTextarea1">
                             <Form.Label>Anymore information you would like to add?</Form.Label>
@@ -47,7 +77,7 @@ const HeroSection = () => {
                         </Form.Group>
                         <Form.Group controlId="exampleForm.ControlSelect1">
                             <Form.Label>Topic</Form.Label>
-                            <Form.Control as="select">
+                            <Form.Control as="select" ref={topicRef}>
                                 <option>Feeding</option>
                                 <option>Potty Training</option>
                                 <option>Exercise</option>
@@ -61,12 +91,12 @@ const HeroSection = () => {
                                 <option>Exotic Pets</option>
                             </Form.Control>
                         </Form.Group>
-                        
+
 
 
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="primary" type="submit">
+                        <Button variant="primary" type="submit" disabled={state.loading}>
                             Submit
                         </Button>
                     </Modal.Footer>

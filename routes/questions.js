@@ -10,7 +10,7 @@ router.get('/getAll', function(req, res, next) {
 
 });
 
-router.post('/postQuestion', async function(req, res, next) {
+router.post('/api/postQuestion', async function(req, res, next) {
     // res.send('respond with a resource');
     db.Question.create({question: req.body.question, topic: req.body.topic, UserId: req.body.userId})
     .then((dbResponse) => { res.send("Question posted!")})
