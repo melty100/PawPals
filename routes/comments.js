@@ -6,40 +6,40 @@ const { Sequelize } = require('../models');
 router.get('/getAll', function(req, res, next) {
     // res.send('respond with a resource');
     db.Comment.findAll({})
-    .then((dbComment) => res.send(dbComment))
+    .then((dbComments) => res.send(dbComments))
     .catch(err => res.status(422).end());
 
 });
 
 router.get('/getByQuestion/:id', function(req, res, next) {
-    db.comment.findAll({where: {QuestionId : req.params.QuestionId}})
-    then((dbComments) => res.send(dbComment))
+    db.Comment.findAll({where: {QuestionId : req.params.id}})
+    .then((dbComments) => res.send(dbComments))
     .catch(err => {res.status(422).end()});
-});
+}); 
 
-router.post('/postComment', async function(req, res, next) {
+router.post('/postComment', function(req, res, next) {
     // res.send('respond with a resource');
     db.Comment.create({
         comment: req.body.comment,
         QuestionId: req.body.QuestionId,
         UserId: req.body.UserId,
-        parentCommentId : req.body.UserId
+        parentCommentId : req.body.parentCommentId
     })
     .then((dbResponse) => { res.send("Comment posted!")})
     .catch((err) => {res.status(422).json(err);});
 });
 
-router.post('/liked/:id', async function(req, res, next) {
+router.post('/liked/:id', function(req, res, next) {
 
-    db.comment.update({likes : Sequelize.literal('likes + 1')}, {where : {id : req.params.id}})
+    db.Comment.update({likes : Sequelize.literal('likes + 1')}, {where : {id : req.params.id}})
     .then(() => res.send("comment liked!"))
     .catch(err => res.status(422).end());
 });
 
-router.post('/disliked/:id', async function(req, res, next) {
+router.post('/disliked/:id', function(req, res, next) {
 
-    db.comment.update({dislikes : Sequelize.literal('dislikes + 1')}, {where : {id : req.params.id}})
-    .then(() => res.send("comment liked!"))
+    db.Comment.update({dislikes : Sequelize.literal('dislikes + 1')}, {where : {id : req.params.id}})
+    .then(() => res.send("comment disliked :("))
     .catch(err => res.status(422).end());
 });
 

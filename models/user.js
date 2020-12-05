@@ -34,6 +34,11 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
 
+    userBio: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+
     petBio: {
       type: DataTypes.STRING,
       allowNull: true

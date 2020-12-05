@@ -7,7 +7,6 @@ router.get('/getAll', function(req, res, next) {
     db.Question.findAll({})
     .then((dbQuestions) => res.send(dbQuestions))
     .catch(err => res.status(422).json(err));
-
 });
 
 router.get('/:id', function(req, res, next) {
@@ -34,7 +33,7 @@ router.post('/postQuestion', async function(req, res, next) {
         question: req.body.question,
         topic: req.body.topic,
         content: req.body.content,
-        UserId: req.body.userId
+        UserId: req.body.UserId
     })
     .then((dbResponse) => { res.send("Question posted!")})
     .catch((err) => res.status(422).json(err));
