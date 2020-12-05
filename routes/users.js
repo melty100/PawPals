@@ -24,13 +24,8 @@ router.post('/postUser', function(req, res, next) {
         userName: req.body.userName,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-<<<<<<< HEAD
-        bio: req.body.bio,
-        petBio: req.body.petBio
-=======
         petBio: req.body.petBio,
         userBio: req.body.userBIo
->>>>>>> moreRoutes
     })
     .then((dbResponse) => {res.send("User Posted!")})
     .catch((err) => res.send(422).json(err));
