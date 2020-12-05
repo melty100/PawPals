@@ -1,39 +1,50 @@
-
 import React from 'react'
 import './App.css'
 import './components/App.scss'
 import './components/login/style.scss'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
-// import Navbar from './components/Navbar';
-
 import Header from './components/Header'
 import Footer from './components/Footer'
 import HomePage from './pages/Homepage/HomePage'
 import QuestionPage from './pages/QuestionPage'
+// import { Login } from './components/login/login'
+// import { Register } from './components/login/register'
 import LoginPage from './components/loginpage'
+import MyProfile from './pages/MyProfile/index.js'
+import { StoreProvider } from "./utils/GlobalState";
+
+
+
+
 const App = () => {
 
 
   return (
     <div className='app__main'>
-     
-      <main>
-
-        <Container>
-          <Router>
+      <Router>
+        <StoreProvider>
           <Header />
+
+
+          <main>
             <Route path="/" component={HomePage} exact />
+            <Container>
 
-            <Route path="/question/:id" component={QuestionPage} />
+              <Route path="/question/questions/:id" component={QuestionPage} />
+              <Route path="/myprofile" component={MyProfile} />
+
+              <Route path='/login' component={LoginPage} exact />
+              {/* <Route path='/login' component={Register} exact />
+              <Route path='/login' component={Login} exact /> */}
 
 
-            <Route path='/login' component={LoginPage} exact />
-          </Router>
-        </Container>
+            </Container>
+          </main>
+          <Footer />
+        </StoreProvider>
 
-      </main>
-      <Footer />
+      </Router>
     </div>
   )
 }

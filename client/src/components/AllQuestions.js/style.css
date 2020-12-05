@@ -13,4 +13,12 @@
 .questionText {
     display: flex;
     justify-content: center;
+    
+}
+
+.comments_icon {
+    font-size: 28px;
+    padding-right: 8px;
+    display: flex;
+    justify-content: flex-end;
 }

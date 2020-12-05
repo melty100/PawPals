@@ -1,0 +1,8 @@
+id,question,topic,createdAt,updatedAt,UserId
+1,"What kind of toys are best for a puppy",#PUPPY,"2020-12-01 20:32:05","2020-12-01 20:32:05",NULL
+2,"Where should i put my cat's litterbox?",#CAT,"2020-12-01 20:32:05","2020-12-01 20:32:05",NULL
+3,"How much exercise does a puppy need",#DogCare,"2020-12-01 20:32:05","2020-12-01 20:32:05",NULL
+4,"What kind of toys are best for a puppy",#PUPPY,"2020-12-01 20:32:07","2020-12-01 20:32:07",NULL
+5,"Where should i put my cat's litterbox?",#CAT,"2020-12-01 20:32:07","2020-12-01 20:32:07",NULL
+6,"How much exercise does a puppy need",#DogCare,"2020-12-01 20:32:07","2020-12-01 20:32:07",NULL
+7,"DOES THIS ROUTE WORK",Route,"2020-12-02 04:59:35","2020-12-02 04:59:35",1
