@@ -8,8 +8,9 @@ class Register extends React.Component {
 
     render() {
         return ( <div className="base-container" ref={this.props.containerRef}>
-            <div className="header"><h2>Register</h2></div>
+            
             <div className="content">
+            <div className="header"><h2>Register</h2></div>
                 <div className="image">
                     <img src={loginImg} alt="pup"/>
                 </div>
@@ -29,7 +30,7 @@ class Register extends React.Component {
                 </div>
             </div>
             <div className="footer">
-                <button type="button btn success" className="btn">Register</button>
+                {/* <button type="button btn success" className="btn">Register</button> */}
             </div>
         </div>
         );
