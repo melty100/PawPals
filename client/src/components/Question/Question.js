@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Card } from 'react-bootstrap'
 import { FaRegComments } from 'react-icons/fa'
-import './style.css'
+// import './style.css'
 
 const Question = ({ question }) => {
     // const [commentCount, setCommentCount] = useState[0];

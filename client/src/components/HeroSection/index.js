@@ -18,7 +18,7 @@ const HeroSection = () => {
     }
 
     const questionRef = useRef();
-    // const contentRef = useRef();
+    const contentRef = useRef();
     // const userRef = useRef();
     const topicRef = useRef();
     const [state, dispatch] = useStoreContext();
@@ -28,7 +28,7 @@ const HeroSection = () => {
         dispatch({ type: LOADING });
         API.addPost({
             question: questionRef.current.value,
-            // content: content.current.valaue,
+            content: contentRef.current.value,
             topic: topicRef.current.value,
             // user: userRef.current.value
         })
@@ -41,6 +41,7 @@ const HeroSection = () => {
             .catch(err => console.log(err));
 
         questionRef.current.value = "";
+        contentRef.current.value = "";
         topicRef.current.value = "";
     };
 
@@ -73,7 +74,7 @@ const HeroSection = () => {
                         </Form.Group>
                         <Form.Group controlId="exampleForm.ControlTextarea1">
                             <Form.Label>Anymore information you would like to add?</Form.Label>
-                            <Form.Control as="textarea" rows={3} />
+                            <Form.Control as="textarea" rows={3} required ref={contentRef}/>
                         </Form.Group>
                         <Form.Group controlId="exampleForm.ControlSelect1">
                             <Form.Label>Topic</Form.Label>

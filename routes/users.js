@@ -17,6 +17,7 @@ router.post('/postUser', function(req, res, next) {
         userName: req.body.userName,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
+        bio: req.body.bio,
         petBio: req.body.petBio
     })
     .then((dbResponse) => {res.send("User Posted!")})

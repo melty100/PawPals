@@ -33,6 +33,11 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
 
+    bio: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+
     petBio: {
       type: DataTypes.STRING,
       allowNull: true

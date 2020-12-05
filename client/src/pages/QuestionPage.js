@@ -1,26 +1,28 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Row, Col, Card} from 'react-bootstrap'
 // import Header from '../components/Header'
 import Topics from '../components/Topics/Topics'
-import questions from '../questions'
+// import questions from '../questions'
 import CommentForm from '../components/CommentForm/CommentForm'
 import Comments from '../components/Comments/Comments'
-// import axios from 'axios'
+import axios from 'axios'
 
 const QuestionPage = ({ match }) => {
 
-    const question = questions.find((q) => q.id === match.params.id)
-    // const [question, setQuestion] = useState({})
+    
 
-    // useEffect(() => {
-    //     const fetchQuestion = async() => {
-    //         const { data } = await axios.get(`/api/question/${match.params.id}`)
+    // const question = questions.find((q) => q.id === match.params.id)
+    const [question, setQuestion] = useState({})
 
-    //         setQuestion(data)
-    //     }
+    useEffect(() => {
+        const fetchQuestion = async() => {
+            const { data } = await axios.get(`/questions/question/${match.params.id}`)
 
-    //     fetchQuestion()
-    // }, [match])
+            setQuestion(data)
+        }
+
+        fetchQuestion()
+    }, [match])
 
 
     return (

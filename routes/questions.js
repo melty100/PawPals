@@ -10,6 +10,16 @@ router.get('/getAll', function(req, res, next) {
 
 });
 
+router.get("/question/:id", function(req, res, next) {
+    db.Question.findOne({
+      where: {
+        id: req.params.id
+      }
+    })
+    .then((dbQuestions) => res.send(dbQuestions))
+    .catch((err) => {res.status(422).json(err);});
+  });
+
 router.post('/postQuestion', async function(req, res, next) {
     // res.send('respond with a resource');
     db.Question.create(
