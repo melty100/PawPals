@@ -47,11 +47,11 @@ db.Comments.belongsTo(db.Question);
 db.User.hasMany(db.Comments);
 db.Comments.belongsTo(db.User);
 
-db.Comments.hasOne(db.Comments, {
-    foreignKey: 'nestedComment_id'
+db.Comments.hasMany(db.Comments, {
+    foreignKey: 'parentCommentId'
   });
 db.Comments.belongsTo(db.Comments, {
-  foreignKey: 'nestedComment_id',
+  foreignKey: 'parentCommentId',
   allowNull: true
 });
 

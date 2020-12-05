@@ -20,6 +20,7 @@ module.exports = function(sequelize, DataTypes) {
 
     userName: {
       type: DataTypes.STRING,
+      unique: true,
       allowNull: false
     },
 
@@ -33,7 +34,11 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
 
+<<<<<<< HEAD
     bio: {
+=======
+    userBio: {
+>>>>>>> moreRoutes
       type: DataTypes.STRING,
       allowNull: true
     },
@@ -41,6 +46,16 @@ module.exports = function(sequelize, DataTypes) {
     petBio: {
       type: DataTypes.STRING,
       allowNull: true
+    },
+
+    createdAt: {
+      type: DataTypes.DATE,
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+    },
+
+    updatedAt: {
+      type: DataTypes.DATE,
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
     }
   });
   // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database

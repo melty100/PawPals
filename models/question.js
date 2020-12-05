@@ -4,7 +4,8 @@ module.exports = function(sequelize, DataTypes) {
 
     question: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      unique: true
     },
 
     topic: {
@@ -15,6 +16,21 @@ module.exports = function(sequelize, DataTypes) {
     content: {
       type: DataTypes.STRING,
       allowNull: true
+    },
+
+    UserId: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+
+    createdAt: {
+      type: DataTypes.DATE,
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+    },
+
+    updatedAt: {
+      type: DataTypes.DATE,
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
     }
   });
 
