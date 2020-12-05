@@ -8,8 +8,9 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import HomePage from './pages/Homepage/HomePage'
 import QuestionPage from './pages/QuestionPage'
-import { Login } from './components/login/login'
-import { Register } from './components/login/register'
+// import { Login } from './components/login/login'
+// import { Register } from './components/login/register'
+import LoginPage from './components/loginpage'
 import MyProfile from './pages/MyProfile/index.js'
 import { StoreProvider } from "./utils/GlobalState";
 
@@ -33,7 +34,11 @@ const App = () => {
               <Route path="/question/questions/:id" component={QuestionPage} />
               <Route path="/myprofile" component={MyProfile} />
 
-              <Route path='/login' component={Login} exact />
+              <Route path='/login' component={LoginPage} exact />
+              {/* <Route path='/login' component={Register} exact />
+              <Route path='/login' component={Login} exact /> */}
+
+
             </Container>
           </main>
           <Footer />
