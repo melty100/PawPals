@@ -28,10 +28,10 @@ const App = () => {
 
 
           <main>
-            <Route path="/" component={HomePage} exact />
+            <Route exact path="/" component={HomePage} />
             <Container>
 
-              <Route path="/question/questions/:id" component={QuestionPage} />
+              <Route exact path="/question/:id" component={QuestionPage} />
               <Route path="/myprofile" component={MyProfile} />
 
               <Route path='/login' component={LoginPage} exact />

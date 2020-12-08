@@ -31,7 +31,7 @@ const AllQuestions = () => {
     return (
         <div>
             {state.posts.map(post => (
-                <Card className='my-3 rounded questionCard' >
+                <Card key={post.id} className='my-3 rounded questionCard' >
                 <Card.Header><small className="text-muted">Posted: {post.createdAt}</small></Card.Header>
                 <Card.Body key={post.id}>
                     <Link to={`/question/${post.id}`}>

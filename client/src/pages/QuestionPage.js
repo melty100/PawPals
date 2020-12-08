@@ -1,28 +1,38 @@
 import React, { useState, useEffect } from 'react'
-import { Row, Col, Card} from 'react-bootstrap'
+import { Row, Col, Card } from 'react-bootstrap'
+import { useParams } from "react-router-dom";
 // import Header from '../components/Header'
 import Topics from '../components/Topics/Topics'
 // import questions from '../questions'
 import CommentForm from '../components/CommentForm/CommentForm'
 import Comments from '../components/Comments/Comments'
-import axios from 'axios'
+import API from "../utils/API";
+// import { useStoreContext } from "../utils/GlobalState";
+import { GET_POST } from "../utils/actions";
+// import axios from 'axios'
 
-const QuestionPage = ({ match }) => {
+const QuestionPage = (props) => {
 
+   const [question, setQuestion] = useState({})
+
+   const {id} = useParams()
+   useEffect(() => {
+       API.getPost(id)
+        .then(res => setQuestion(res.data))
+        .catch(err => console.log(err))
+   }, [])
     
+   
 
-    // const question = questions.find((q) => q.id === match.params.id)
-    const [question, setQuestion] = useState({})
+    // useEffect(() => {
+    //     const fetchQuestion = async() => {
+    //         const { data } = await axios.get(`/questions/question/${match.params.id}`)
 
-    useEffect(() => {
-        const fetchQuestion = async() => {
-            const { data } = await axios.get(`/questions/question/${match.params.id}`)
+    //         setQuestion(data)
+    //     }
 
-            setQuestion(data)
-        }
-
-        fetchQuestion()
-    }, [match])
+    //     fetchQuestion()
+    // }, [match])
 
 
     return (
@@ -32,9 +42,9 @@ const QuestionPage = ({ match }) => {
                 <Row>
                     <Col sm={8}>
                         <Card className='my-3 rounded questionCard' >
-                        <Card.Header><small className="text-muted">Posted: 30 minutes ago</small></Card.Header>
+                            <Card.Header><small className="text-muted">Posted: 30 minutes ago</small></Card.Header>
                             <Card.Body>
-                                <Card.Title as='div' className="questionTitle">{question.title}</Card.Title>
+                                <Card.Title as='div' className="questionTitle">{question.question}</Card.Title>
                                 <Card.Text as='div' className="questionText px-3">
                                     {question.content}
                                 </Card.Text>
@@ -42,13 +52,13 @@ const QuestionPage = ({ match }) => {
                         </Card>
                         <CommentForm />
                         <Comments />
-                        
+
                     </Col>
                     <Col sm={4}>
                         <Topics />
                     </Col>
                 </Row>
-                
+
             </>
         </div>
     )
