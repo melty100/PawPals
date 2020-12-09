@@ -7,9 +7,7 @@ import Topics from '../components/Topics/Topics'
 import CommentForm from '../components/CommentForm/CommentForm'
 import Comments from '../components/Comments/Comments'
 import API from "../utils/API";
-// import { useStoreContext } from "../utils/GlobalState";
-import { GET_POST } from "../utils/actions";
-// import axios from 'axios'
+
 
 const QuestionPage = (props) => {
 

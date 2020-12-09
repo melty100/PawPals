@@ -24,7 +24,7 @@ const HeroSection = () => {
     const [state, dispatch] = useStoreContext();
 
     const handleSubmit = e => {
-        e.preventDefault();
+        // e.preventDefault();
         dispatch({ type: LOADING });
         API.addPost({
             question: questionRef.current.value,

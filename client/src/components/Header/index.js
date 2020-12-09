@@ -13,7 +13,7 @@ const Header = () => {
                 <Navbar.Brand as='div' href="#home">Project 3</Navbar.Brand>
                 </Link>
                 <Nav as='div' className="mr-auto">
-                    <Link to="myprofile">
+                    <Link to="/myprofile">
                         <Navbar.Text>My Profile</Navbar.Text>
                     
                     </Link>
