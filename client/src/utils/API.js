@@ -12,5 +12,14 @@ export default {
     // },
     addPost: function (postData) {
         return axios.post("/questions/postQuestion", postData);
+    },
+    getCommentsById: function (id) {
+        return axios.get("/comments/getByQuestion/" + id)
+    },
+    getComments: function () {
+        return axios.get("/comments/getAll")
+    },
+    addComment: function(commentData) {
+        return axios.post("/comments/postComment", commentData)
     }
 };

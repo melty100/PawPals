@@ -7,7 +7,7 @@ import { Modal, Form } from 'react-bootstrap'
 import { Button } from '../ButtonElement'
 import { HeroContainer, HeroBg, ImageBg, HeroContent, HeroH1, HeroP, HeroBtnWrapper, QuestionEmpty, QuestionFilled } from './HeroElements';
 
-const HeroSection = () => {
+const HeroSection = ({ handleSubmit, questionRef, contentRef, topicRef }) => {
     const [hover, setHover] = useState(false)
     const [show, setShow] = useState(false);
 
@@ -17,33 +17,33 @@ const HeroSection = () => {
         setHover(!hover)
     }
 
-    const questionRef = useRef();
-    const contentRef = useRef();
-    // const userRef = useRef();
-    const topicRef = useRef();
-    const [state, dispatch] = useStoreContext();
+    // const questionRef = useRef();
+    // const contentRef = useRef();
+    // // const userRef = useRef();
+    // const topicRef = useRef();
+    // const [state, dispatch] = useStoreContext();
 
-    const handleSubmit = e => {
-        // e.preventDefault();
-        dispatch({ type: LOADING });
-        API.addPost({
-            question: questionRef.current.value,
-            content: contentRef.current.value,
-            topic: topicRef.current.value,
-            // user: userRef.current.value
-        })
-            .then(result => {
-                dispatch({
-                    type: ADD_POST,
-                    post: result.data
-                });
-            })
-            .catch(err => console.log(err));
+    // const handleSubmit = e => {
+    //     // e.preventDefault();
+    //     dispatch({ type: LOADING });
+    //     API.addPost({
+    //         question: questionRef.current.value,
+    //         content: contentRef.current.value,
+    //         topic: topicRef.current.value,
+    //         // user: userRef.current.value
+    //     })
+    //         .then(result => {
+    //             dispatch({
+    //                 type: ADD_POST,
+    //                 post: result.data
+    //             });
+    //         })
+    //         .catch(err => console.log(err));
 
-        questionRef.current.value = "";
-        contentRef.current.value = "";
-        topicRef.current.value = "";
-    };
+    //     questionRef.current.value = "";
+    //     contentRef.current.value = "";
+    //     topicRef.current.value = "";
+    // };
 
     return (
         <>
@@ -97,7 +97,7 @@ const HeroSection = () => {
 
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="primary" type="submit" disabled={state.loading}>
+                        <Button variant="primary" type="submit">
                             Submit
                         </Button>
                     </Modal.Footer>

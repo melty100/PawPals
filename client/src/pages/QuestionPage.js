@@ -1,36 +1,56 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Row, Col, Card } from 'react-bootstrap'
 import { useParams } from "react-router-dom";
 // import Header from '../components/Header'
 import Topics from '../components/Topics/Topics'
 // import questions from '../questions'
-import CommentForm from '../components/CommentForm/CommentForm'
 import Comments from '../components/Comments/Comments'
+import CommentForm from '../components/CommentForm/CommentForm'
 import API from "../utils/API";
 
 
 const QuestionPage = (props) => {
 
-   const [question, setQuestion] = useState({})
+    const [question, setQuestion] = useState({})
+    const [comments, setComments] = useState([])
+    const commentRef = useRef();
 
-   const {id} = useParams()
-   useEffect(() => {
-       API.getPost(id)
-        .then(res => setQuestion(res.data))
-        .catch(err => console.log(err))
-   }, [])
+    const { id } = useParams()
+    useEffect(() => {
+        API.getPost(id)
+            .then(res => setQuestion(res.data))
+            .catch(err => console.log(err))
+    }, [])
+
+    useEffect(() => {
+        loadComments()
+    }, [])
+
+    function loadComments() {
+        API.getCommentsById(id)
+            .then(res =>
+                setComments(res.data)
+            )
+            .catch(err => console.log(err));
+    };
+
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        API.addComment({
+            comment: commentRef.current.value,
+            QuestionId: id,
+            // user: userRef.current.value
+        })
+            .then(result => loadComments())
+
+            .catch(err => console.log(err));
+
+        commentRef.current.value = "";
+
+    };
+
     
-   
-
-    // useEffect(() => {
-    //     const fetchQuestion = async() => {
-    //         const { data } = await axios.get(`/questions/question/${match.params.id}`)
-
-    //         setQuestion(data)
-    //     }
-
-    //     fetchQuestion()
-    // }, [match])
 
 
     return (
@@ -48,9 +68,10 @@ const QuestionPage = (props) => {
                                 </Card.Text>
                             </Card.Body>
                         </Card>
-                        <CommentForm />
-                        <Comments />
-
+                        <CommentForm handleSubmit={handleSubmit} commentRef={commentRef}/>
+                        {comments.map(comment => (
+                        <Comments questionId={question.id} comment={comment} />
+                        ))}
                     </Col>
                     <Col sm={4}>
                         <Topics />

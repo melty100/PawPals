@@ -8,31 +8,33 @@ import API from "../../utils/API";
 import './style.css'
 
 
-const AllQuestions = () => {
+const AllQuestions = ({ post }) => {
 
-    const [state, dispatch] = useStoreContext();
+    // const [state, dispatch] = useStoreContext();
 
-    useEffect(() => {
-        getPosts();
-    }, []);
+    // useEffect(() => {
+    //     getPosts();
+    // }, []);
 
-    const getPosts = () => {
-        dispatch({ type: LOADING });
-        API.getPosts()
-            .then(results => {
-                dispatch({
-                    type: UPDATE_POSTS,
-                    posts: results.data
-                });
-            })
-            .catch(err => console.log(err));
-    };
+    
+
+    // const getPosts = () => {
+    //     dispatch({ type: LOADING });
+    //     API.getPosts()
+    //         .then(results => {
+    //             dispatch({
+    //                 type: UPDATE_POSTS,
+    //                 posts: results.data
+    //             });
+    //         })
+    //         .catch(err => console.log(err));
+    // };
 
 
 
     return (
         <div>
-            {state.posts.map(post => (
+            {/* {state.posts.map(post => ( */}
                 <Card key={post.id} className='my-3 rounded questionCard' >
                     <Card.Header><small className="text-muted">Posted: {post.createdAt}</small></Card.Header>
                     <Card.Body>
@@ -54,7 +56,7 @@ const AllQuestions = () => {
                     </Card.Footer>
                 </Card>
 
-            ))}
+            {/* ))} */}
 
         </div>
     )
