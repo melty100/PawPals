@@ -4,9 +4,12 @@ export default {
     getPosts: function () {
         return axios.get("/questions/getAll");
     },
-    getPost: function(id) {
-        return axios.get("/questions/question/" + id);
-      },
+    getPost: function (id) {
+        return axios.get("/questions/" + id);
+    },
+    getTopic: function (topic) {
+        return axios.get("/questions/topic/" + topic);
+    },
     // searchPosts : function(query) {
     //     return axios.get("", { params: { q: query } })
     // },
@@ -19,7 +22,7 @@ export default {
     getComments: function () {
         return axios.get("/comments/getAll")
     },
-    addComment: function(commentData) {
+    addComment: function (commentData) {
         return axios.post("/comments/postComment", commentData)
     }
 };

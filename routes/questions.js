@@ -10,13 +10,19 @@ router.get('/getAll', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
-    db.Question.find({where : {id : req.params.id}})
+    db.Question.findOne({where : {id : req.params.id}})
     .then((dbQuestion) => res.send(dbQuestion))
     .catch(err => res.status(422).json(err));
 });
 
 router.get('/:question', function(req, res, next) {
-    db.Question.find({where : {question: req.params.question}})
+    db.Question.findAll({where : {question: req.params.question}})
+    .then((dbQuestion) => res.send(dbQuestion))
+    .catch(err => res.status(422).json(err));
+});
+
+router.get('/topic/:topic', function(req, res, next) {
+    db.Question.findAll({where : {topic: req.params.topic}})
     .then((dbQuestion) => res.send(dbQuestion))
     .catch(err => res.status(422).json(err));
 });
@@ -27,15 +33,6 @@ router.get('/:UserId', function(req, res, next) {
     .catch(err => res.status(422).json(err));
 });
 
-router.get("/question/:id", function(req, res, next) {
-    db.Question.findOne({
-      where: {
-        id: req.params.id
-      }
-    })
-    .then((dbQuestions) => res.send(dbQuestions))
-    .catch((err) => {res.status(422).json(err);});
-  });
 
 router.post('/postQuestion', async function(req, res, next) {
     // res.send('respond with a resource');

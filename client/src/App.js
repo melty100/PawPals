@@ -13,6 +13,7 @@ import QuestionPage from './pages/QuestionPage'
 import LoginPage from './components/loginpage'
 import MyProfile from './pages/MyProfile/index.js'
 import { StoreProvider } from "./utils/GlobalState";
+import TopicPage from './pages/TopicPage'
 
 
 
@@ -33,6 +34,7 @@ const App = () => {
 
               <Route exact path="/question/:id" component={QuestionPage} />
               <Route path="/myprofile" component={MyProfile} exact/>
+              <Route path="/topic/:topic" component={TopicPage} exact/>
 
               <Route path='/login' component={LoginPage} exact />
               {/* <Route path='/login' component={Register} exact />
