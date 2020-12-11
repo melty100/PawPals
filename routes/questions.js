@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var db = require("../models");
+const { Op } = require("sequelize");
+var isAuthenticated = require("../config/middleware/isAuthenticated");
 
 router.get('/getAll', function(req, res, next) {
     // res.send('respond with a resource');
@@ -10,22 +12,34 @@ router.get('/getAll', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
-    db.Question.find({where : {id : req.params.id}})
+    db.Question.findOne({where : {id : req.params.id}})
     .then((dbQuestion) => res.send(dbQuestion))
     .catch(err => res.status(422).json(err));
 });
 
 router.get('/:question', function(req, res, next) {
-    db.Question.find({where : {question: req.params.question}})
+    db.Question.findOne({where : {question: req.params.question}})
     .then((dbQuestion) => res.send(dbQuestion))
     .catch(err => res.status(422).json(err));
 });
 
 router.get('/:UserId', function(req, res, next) {
-    db.Question.find({where : {UserId: req.params.UserId}})
+    db.Question.findOne({where : {UserId: req.params.UserId}})
     .then((dbQuestion) => res.send(dbQuestion))
     .catch(err => res.status(422).json(err));
 });
+
+router.get('/search/:query', function(req, res, next) {
+    db.Question.findAll({
+        where : {
+            question: {
+                [Op.like]:  `%${req.params.query}%` 
+            }
+        }
+    })
+    .then((dbQuestions) => res.send(dbQuestions))
+    .catch(err => res.status(422).json(err));
+})
 
 router.get("/question/:id", function(req, res, next) {
     db.Question.findOne({
@@ -37,7 +51,7 @@ router.get("/question/:id", function(req, res, next) {
     .catch((err) => {res.status(422).json(err);});
   });
 
-router.post('/postQuestion', async function(req, res, next) {
+router.post('/postQuestion', function(req, res, next) {
     // res.send('respond with a resource');
     db.Question.create({
         question: req.body.question,
@@ -45,7 +59,7 @@ router.post('/postQuestion', async function(req, res, next) {
         content: req.body.content,
         UserId: req.body.UserId
     })
-    .then((dbResponse) => { res.send("Question posted!")})
+    .then((dbResponse) => res.send("question posted"))
     .catch((err) => res.status(422).json(err));
 });
 

@@ -5,7 +5,7 @@ var db = require("../models");
 
 passport.use(new LocalStrategy(
   {
-    emailField: "email"
+    email: "email"
   },
   function(email, password, done) {
 
