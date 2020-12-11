@@ -35,7 +35,6 @@ router.get('/:UserId', function(req, res, next) {
     .catch(err => res.status(422).json(err));
 });
 
-<<<<<<< HEAD
 router.get('/search/:query', function(req, res, next) {
     db.Question.findAll({
         where : {
