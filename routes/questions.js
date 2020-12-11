@@ -18,9 +18,6 @@ router.get('/:id', function(req, res, next) {
 });
 
 router.get('/:question', function(req, res, next) {
-<<<<<<< HEAD
-    db.Question.findOne({where : {question: req.params.question}})
-=======
     db.Question.findAll({where : {question: req.params.question}})
     .then((dbQuestion) => res.send(dbQuestion))
     .catch(err => res.status(422).json(err));
@@ -28,7 +25,6 @@ router.get('/:question', function(req, res, next) {
 
 router.get('/topic/:topic', function(req, res, next) {
     db.Question.findAll({where : {topic: req.params.topic}})
->>>>>>> 905b4e394f6bee8623d1b58a722699e910e62110
     .then((dbQuestion) => res.send(dbQuestion))
     .catch(err => res.status(422).json(err));
 });
@@ -61,8 +57,6 @@ router.get("/question/:id", function(req, res, next) {
     .then((dbQuestions) => res.send(dbQuestions))
     .catch((err) => {res.status(422).json(err);});
   });
-=======
->>>>>>> 905b4e394f6bee8623d1b58a722699e910e62110
 
 router.post('/postQuestion', function(req, res, next) {
     // res.send('respond with a resource');
