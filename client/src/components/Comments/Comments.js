@@ -4,14 +4,20 @@ import { LikeButton, DislikeButton, FooterContents } from './CommentsElements'
 import API from "../../utils/API";
 
 const Comments = ({ comment }) => {
-    const [count, setCount] = useState(0)
+    const [count, setCount] = useState(comment.likes)
     
 
+    // useEffect(() => {
+        
+    // }, [])
+    
     function increment() {
+        API.likeComment(comment.id)
         setCount(prevCount => prevCount + 1)
     }
 
     function decrement() {
+        API.dislikeComment(comment.id)
         setCount(prevCount => prevCount - 1)
     }
 

@@ -22,6 +22,13 @@ export default {
     getComments: function () {
         return axios.get("/comments/getAll")
     },
+    likeComment: function (id) {
+        return axios.post("/comments/liked/" + id)
+    },
+    dislikeComment: function (id) {
+        return axios.post("/comments/disliked/" + id)
+    },
+
     addComment: function (commentData) {
         return axios.post("/comments/postComment", commentData)
     }

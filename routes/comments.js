@@ -38,7 +38,7 @@ router.post('/liked/:id', function(req, res, next) {
 
 router.post('/disliked/:id', function(req, res, next) {
 
-    db.Comment.update({dislikes : Sequelize.literal('dislikes + 1')}, {where : {id : req.params.id}})
+    db.Comment.update({likes : Sequelize.literal('likes - 1')}, {where : {id : req.params.id}})
     .then(() => res.send("comment disliked :("))
     .catch(err => res.status(422).end());
 });
