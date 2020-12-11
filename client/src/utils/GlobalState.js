@@ -1,6 +1,6 @@
 import React, { createContext, useReducer, useContext } from "react";
 import {
-  SET_CURRENT_POST,
+  GET_POST,
   UPDATE_POSTS,
   ADD_POST,
   LOADING
@@ -11,11 +11,12 @@ const { Provider } = StoreContext;
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case SET_CURRENT_POST:
+    case GET_POST:
     return {
       ...state,
-      currentPost: action.post,
-      loading: false
+      posts: state.posts.filter((post) => {
+        return post.id === action.id; 
+      })
     };
     
     case UPDATE_POSTS:

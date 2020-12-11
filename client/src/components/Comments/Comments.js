@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
-import { Card } from 'react-bootstrap'
+import React, { useState, useRef, useEffect } from 'react'
+import { Card, Form, Button } from 'react-bootstrap'
 import { LikeButton, DislikeButton, FooterContents } from './CommentsElements'
-const Comments = () => {
+import API from "../../utils/API";
+
+const Comments = ({ comment }) => {
     const [count, setCount] = useState(0)
+    
 
     function increment() {
         setCount(prevCount => prevCount + 1)
@@ -12,12 +15,18 @@ const Comments = () => {
         setCount(prevCount => prevCount - 1)
     }
 
+    
+    // const userRef = useRef();
+    // const [state, dispatch] = useStoreContext();
+    
+    
+
     return (
         <div>
             <Card >
                 <Card.Body>
                     <Card.Title>@Username</Card.Title>
-                    <Card.Text className="px-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation </Card.Text>
+                    <Card.Text className="px-5"> {comment.comment}</Card.Text>
 
                 </Card.Body>
                 <Card.Footer>
@@ -33,6 +42,7 @@ const Comments = () => {
                     </FooterContents>
                 </Card.Footer>
             </Card>
+            
         </div>
     )
 }
