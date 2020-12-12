@@ -6,7 +6,7 @@
     "start": "node app.js",
     "local" : "concurrently \"node ./bin/www\" \"cd client && npm start\"",
     "build": "cd client && npm run build",
-    "heroku-postbuild": "cd client && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
