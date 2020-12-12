@@ -14,7 +14,7 @@ export default {
         return axios.get("/questions/search/" + query);
     },
     addPost: function (postData) {
-        return axios.post("/questions/postQuestion", postData);
+        return axios.post("/authenticated/postQuestion", postData);
     },
     getCommentsById: function (id) {
         return axios.get("/comments/getByQuestion/" + id)

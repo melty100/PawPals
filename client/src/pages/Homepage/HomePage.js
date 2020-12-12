@@ -6,6 +6,7 @@ import API from '../../utils/API'
 // import Question from '../../components/Question/Question'
 import Topics from '../../components/Topics/Topics'
 import Search from '../../components/Search/Search'
+import { Redirect } from "react-router-dom"
 // import questions from '../../questions'
 import './style.css'
 
@@ -13,6 +14,7 @@ import './style.css'
 const HomePage = () => {
     const [questions, setQuestions] = useState([])
     const [questionSearch, setQuestionSearch] = useState("");
+    const [notLoggedIn, setNotLoggedIn] = useState(false);
     const questionRef = useRef();
     const contentRef = useRef();
     // const userRef = useRef();
@@ -39,7 +41,14 @@ const HomePage = () => {
             // userId: 
             // user: userRef.current.value
         })
-            .then(result => loadQuestions())
+            .then(result => {
+                    if(result.loggedIn){
+                        loadQuestions();
+                    }
+                    else {
+                        setNotLoggedIn(true);
+                    }
+                })
 
             .catch(err => console.log(err));
 
@@ -70,6 +79,7 @@ const HomePage = () => {
         <>
             <HeroSection handleSubmit={handleSubmit} questionRef={questionRef} contentRef={contentRef} topicRef={topicRef} />
             {/* <div className="home_container"> */}
+            {notLoggedIn && <Redirect to="/login"/>}
             <Container>
                 <Row>
                     <Col  sm={8}>

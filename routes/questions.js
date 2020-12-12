@@ -69,16 +69,4 @@ router.get("/question/:id", function(req, res, next) {
     .catch((err) => {res.status(422).json(err);});
   });
 
-router.post('/postQuestion', function(req, res, next) {
-    // res.send('respond with a resource');
-    db.Question.create({
-        question: req.body.question,
-        topic: req.body.topic,
-        content: req.body.content,
-        UserId: req.body.UserId
-    })
-    .then((dbResponse) => res.send("question posted"))
-    .catch((err) => res.status(422).json(err));
-});
-
 module.exports = router;
