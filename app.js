@@ -7,10 +7,10 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const PORT = process.env.PORT || 8080;
 
-var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var questionsRouter = require('./routes/questions');
 var commentsRouter = require('./routes/comments');
+var indexRouter = require('./routes/index');
 
 const cors = require('cors')
 var db = require("./models");
