@@ -5,12 +5,14 @@ import AllQuestions from '../../components/AllQuestions.js'
 import API from '../../utils/API'
 // import Question from '../../components/Question/Question'
 import Topics from '../../components/Topics/Topics'
+import Search from '../../components/Search/Search'
 // import questions from '../../questions'
 import './style.css'
 
 
 const HomePage = () => {
     const [questions, setQuestions] = useState([])
+    const [questionSearch, setQuestionSearch] = useState("");
     const questionRef = useRef();
     const contentRef = useRef();
     // const userRef = useRef();
@@ -47,6 +49,23 @@ const HomePage = () => {
 
     };
 
+    const handleInputChange = event => {
+        // Destructure the name and value properties off of event.target
+        // Update the appropriate state
+        const { value } = event.target;
+        setQuestionSearch(value);
+      };
+    
+      const handleFormSubmit = event => {
+        // When the form is submitted, prevent its default behavior, get recipes update the recipes state
+        event.preventDefault();
+        API.searchPosts(questionSearch)
+        //   .then(res => setQuestions(res.data))
+        .then(res => console.log(res.data))
+          .catch(err => console.log(err));
+      };
+
+
     return (
         <>
             <HeroSection handleSubmit={handleSubmit} questionRef={questionRef} contentRef={contentRef} topicRef={topicRef} />
@@ -60,6 +79,7 @@ const HomePage = () => {
                     </Col>
                     {/* <div className="topic_contianer"> */}
                     <Col sm={4}>
+                        <Search handleInputChange={handleInputChange} handleFormSubmit={handleFormSubmit} questionSearch={questionSearch}/>
                         <Topics />
                     </Col>
                     {/* </div> */}

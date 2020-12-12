@@ -3,6 +3,7 @@ import { Row, Col, Card } from 'react-bootstrap'
 import { useParams } from "react-router-dom";
 // import Header from '../components/Header'
 import Topics from '../components/Topics/Topics'
+import Search from '../components/Search/Search'
 // import questions from '../questions'
 import Comments from '../components/Comments/Comments'
 import CommentForm from '../components/CommentForm/CommentForm'
@@ -13,6 +14,7 @@ const QuestionPage = (props) => {
 
     const [question, setQuestion] = useState({})
     const [comments, setComments] = useState([])
+    const [user, setUser] = useState({})
     const commentRef = useRef();
 
     const { id } = useParams()
@@ -38,7 +40,7 @@ const QuestionPage = (props) => {
     const handleSubmit = e => {
         e.preventDefault();
         API.addComment({
-            comment: commentRef.current.value,
+            likes: commentRef.current.value,
             QuestionId: id,
             // user: userRef.current.value
         })
@@ -50,6 +52,22 @@ const QuestionPage = (props) => {
 
     };
 
+    useEffect(() => {
+        loadUsers()
+    }, [])
+
+
+    function loadUsers() {
+        API.getUser(question.UserId)
+            .then(res =>
+                setUser(res.data)
+            )
+            .catch(err => console.log(err));
+    };
+
+
+
+
     
 
 
@@ -60,7 +78,7 @@ const QuestionPage = (props) => {
                 <Row>
                     <Col sm={8}>
                         <Card className='my-3 rounded questionCard' >
-                            <Card.Header><small className="text-muted">Posted: 30 minutes ago</small></Card.Header>
+                            <Card.Header><small className="text-muted">Posted By: {user.userName} {question.createdAt}</small></Card.Header>
                             <Card.Body>
                                 <Card.Title as='div' className="questionTitle">{question.question}</Card.Title>
                                 <Card.Text as='div' className="questionText px-3">
@@ -74,6 +92,7 @@ const QuestionPage = (props) => {
                         ))}
                     </Col>
                     <Col sm={4}>
+                        <Search />
                         <Topics />
                     </Col>
                 </Row>

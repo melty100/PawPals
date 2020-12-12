@@ -29,6 +29,12 @@ router.get('/topic/:topic', function(req, res, next) {
     .catch(err => res.status(422).json(err));
 });
 
+router.get('/userQuestions/:userId', function(req, res, next) {
+    db.Question.findAll({where : {userId: req.params.userId}})
+    .then((dbQuestion) => res.send(dbQuestion))
+    .catch(err => res.status(422).json(err));
+});
+
 router.get('/:UserId', function(req, res, next) {
     db.Question.findOne({where : {UserId: req.params.UserId}})
     .then((dbQuestion) => res.send(dbQuestion))
@@ -38,9 +44,15 @@ router.get('/:UserId', function(req, res, next) {
 router.get('/search/:query', function(req, res, next) {
     db.Question.findAll({
         where : {
-            question: {
+            [Op.or]:[
+            {question: {
                 [Op.like]:  `%${req.params.query}%` 
-            }
+            }},
+            {content: {
+                [Op.like]:  `%${req.params.query}%` 
+            }}
+
+        ]
         }
     })
     .then((dbQuestions) => res.send(dbQuestions))

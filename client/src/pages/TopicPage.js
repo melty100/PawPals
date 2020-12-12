@@ -3,6 +3,7 @@ import { Row, Col, Container } from 'react-bootstrap'
 import { useParams } from "react-router-dom";
 import AllQuestions from '../components/AllQuestions.js'
 import Topics from '../components/Topics/Topics'
+import Search from '../components/Search/Search'
 import API from '../utils/API'
 
 const TopicPage = () => {
@@ -54,6 +55,7 @@ const TopicPage = () => {
                     </Col>
                     {/* <div className="topic_contianer"> */}
                     <Col sm={4}>
+                        <Search />
                         <Topics topic={topic} onClick={loadQuestions}/>
                     </Col>
                     {/* </div> */}

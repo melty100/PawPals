@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Card, Badge } from 'react-bootstrap'
 import { FaRegComments } from 'react-icons/fa'
@@ -11,6 +11,7 @@ import './style.css'
 const AllQuestions = ({ post }) => {
 
     // const [state, dispatch] = useStoreContext();
+    const [user, setUser] = useState({})
 
     // useEffect(() => {
     //     getPosts();
@@ -30,17 +31,38 @@ const AllQuestions = ({ post }) => {
     //         .catch(err => console.log(err));
     // };
 
+    useEffect(() => {
+        loadUsers()
+    }, [])
+
+
+    function loadUsers() {
+        API.getUser(post.UserId)
+            .then(res =>
+                setUser(res.data)
+            )
+            .catch(err => console.log(err));
+    };
+
 
 
     return (
         <div>
             {/* {state.posts.map(post => ( */}
                 <Card key={post.id} className='my-3 rounded questionCard' >
-                    <Card.Header><small className="text-muted">Posted: {post.createdAt}</small></Card.Header>
+                    <Card.Header>
+                        <small className="text-muted">
+                            Posted by: 
+                            <Link to={`/profile/${user.id}`}>
+                            {user.userName} 
+                            </Link>
+                            {post.createdAt}
+                        </small>
+                    </Card.Header>
                     <Card.Body>
-                        <Link to={`/question/${post.id}`}>
+                        <Link to={`/question/${post.id}`} style={{ textDecoration: "none" }}>
 
-                            <Card.Title as='div' className="questionTitle">{post.question}</Card.Title>
+                            <Card.Title as='div' className="questionTitle" style={{ color: 'black' }}>{post.question} </Card.Title>
                         </Link>
                         <Card.Text as='div' className="questionText p-3">
                             {post.content}

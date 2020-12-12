@@ -1,14 +1,99 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
+import { useParams, Link } from "react-router-dom";
 import PlaceholderImg from '../../images/profile-placeholder.png'
 import { Card, Row, Col, ListGroup, Button, Modal, Form } from 'react-bootstrap'
+import API from '../../utils/API'
 
 
 const MyProfile = () => {
 
     const [show, setShow] = useState(false);
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const [profile, setProfile] = useState([])
+    const [userQuestions, setUserQuestions] = useState([])
+    const [userComments, setUserComments] = useState([])
+    const firstNameRef = useRef();
+    const lastNameRef = useRef();
+    const petBioRef = useRef();
+    const userBioRef = useRef();
+    const emailRef = useRef();
+    const usernameRef = useRef();
+    const passwordRef = useRef();
+
+    useEffect(() => {
+        loadProfile()
+    }, [])
+
+    useEffect(() => {
+        loadUserQuestions()
+    }, [])
+
+    useEffect(() => {
+        loadUserComments()
+    }, [])
+
+    const { profileId } = useParams();
+
+    function loadProfile() {
+        API.getUser(profileId)
+            .then(res =>
+                setProfile(res.data)
+            )
+            .catch(err => console.log(err));
+    };
+
+    function loadUserQuestions() {
+        API.getUserQuestions(profileId)
+            .then(res =>
+                setUserQuestions(res.data)
+            )
+            .catch(err => console.log(err));
+    };
+
+    function loadUserComments() {
+        API.getUserComments(profileId)
+            .then(res =>
+                setUserComments(res.data)
+            )
+            .catch(err => console.log(err));
+    };
+
+    // const handleSubmit = e => {
+    //     e.preventDefault();
+    //     API.addProfile({
+    //         // email: req.body.email,
+    //         // password: req.body.password,
+    //         // userName: req.body.userName,
+    //         email: emailRef.current.value,
+    //         password: passwordRef.current.value,
+    //         userName: usernameRef.current.value,
+    //         firstName: firstNameRef.current.value,
+    //         lastName: lastNameRef.current.value,
+    //         petBio: petBioRef.current.value,
+    //         userBio: userBioRef.current.value,
+            
+
+    //         // userId: 
+    //         // user: userRef.current.value
+    //     })
+    //         // .then(result => loadProfile())
+    //         .then(result => console.log(result))
+
+    //         .catch(err => console.log(err));
+
+    //         emailRef.current.value = "";
+    //         passwordRef.current.value = "";
+    //         usernameRef.current.value = "";
+    //         firstNameRef.current.value = "";
+    //         lastNameRef.current.value = "";
+    //         petBioRef.current.value = "";
+    //         userBioRef.current.value = "";
+            
+
+
+    // };
 
     return (
         <div>
@@ -41,7 +126,7 @@ const MyProfile = () => {
                                         justifyContent: 'space-between'
                                     }}
                                 >
-                                    <Card.Title><h2>John Smith</h2></Card.Title>
+                                    <Card.Title><h2>{profile.firstName} {profile.lastName}</h2></Card.Title>
 
 
                                     <Button variant="danger" size="sm" style={{ height: 'max-content' }} onClick={handleShow}>
@@ -56,14 +141,38 @@ const MyProfile = () => {
                                         </Modal.Header>
                                         <Form>
                                             <Modal.Body>
+                                            <Form.Row>
+                                                    <Col>
+                                                        <Form.Label>email </Form.Label>
+                                                        <Form.Control placeholder="email" required ref={emailRef}/>
+                                                    </Col>
+                                                    <Col>
+                                                        <Form.Label>password </Form.Label>
+                                                        <Form.Control placeholder="pw" required ref={passwordRef}/>
+                                                    </Col>
+                                                    <Col>
+                                                        <Form.Label>userName </Form.Label>
+                                                        <Form.Control placeholder="un" required ref={usernameRef}/>
+                                                    </Col>
+                                                </Form.Row>
+                                                <Form.Row>
+                                                    <Col>
+                                                        <Form.Label>First Name </Form.Label>
+                                                        <Form.Control placeholder="First name" required ref={firstNameRef}/>
+                                                    </Col>
+                                                    <Col>
+                                                        <Form.Label>Last Name </Form.Label>
+                                                        <Form.Control placeholder="Last name" required ref={lastNameRef}/>
+                                                    </Col>
+                                                </Form.Row>
 
                                                 <Form.Group controlId="AboutMeInput">
                                                     <Form.Label>About Me: </Form.Label>
-                                                    <Form.Control as="textarea" rows={3} />
+                                                    <Form.Control as="textarea" rows={3} ref={userBioRef}/>
                                                 </Form.Group>
                                                 <Form.Group controlId="exampleForm.ControlTextarea1">
                                                     <Form.Label>My Pet: </Form.Label>
-                                                    <Form.Control as="textarea" rows={3} />
+                                                    <Form.Control as="textarea" rows={3} ref={petBioRef}/>
                                                 </Form.Group>
                                                 <div className="mb-3">
                                                     <Form.File id="formcheck-api-regular">
@@ -88,13 +197,13 @@ const MyProfile = () => {
 
                                 <Card.Text>
                                     <p>
-                                        <strong>About Me: </strong>Some quick example text to build on the card title and make up the bulk of
-                                    the card's content.
+                                        <strong>About Me: </strong>
+                                        {profile.userBio}
                                     </p>
 
                                     <p>
-                                        <strong>My Pet: </strong>Some quick example text to build on the card title and make up the bulk of
-                                    the card's content.
+                                        <strong>My Pet: </strong>
+                                        {profile.petBio}
                                     </p>
 
                                 </Card.Text>
@@ -114,14 +223,13 @@ const MyProfile = () => {
                             <Card.Title style={{ textAlign: "center" }}><h3>Questions</h3></Card.Title>
                             <Card.Text>
                                 <ListGroup variant="flush">
-                                    <ListGroup.Item>Cras justo odio</ListGroup.Item>
-                                    <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-                                    <ListGroup.Item>Morbi leo risus</ListGroup.Item>
-                                    <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
-                                    <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
-                                    <ListGroup.Item>Morbi leo risus</ListGroup.Item>
-                                    <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
-                                    <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+                                    {userQuestions.map(userQuestion => (
+                                    <ListGroup.Item>
+                                        <Link to={`/question/${userQuestion.id}`} style={{color: 'black'}}>
+                                        {userQuestion.question}
+                                        </Link>
+                                    </ListGroup.Item>
+                                    ))}
                                 </ListGroup>
                             </Card.Text>
                         </Card.Body>
@@ -133,14 +241,13 @@ const MyProfile = () => {
                             <Card.Title style={{ textAlign: "center" }}><h3>Community Contributions</h3></Card.Title>
                             <Card.Text>
                                 <ListGroup variant="flush">
-                                    <ListGroup.Item>Cras justo odio</ListGroup.Item>
-                                    <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-                                    <ListGroup.Item>Morbi leo risus</ListGroup.Item>
-                                    <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
-                                    <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
-                                    <ListGroup.Item>Morbi leo risus</ListGroup.Item>
-                                    <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
-                                    <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+                                {userComments.map(userComment => (
+                                    <ListGroup.Item>
+                                        <Link to={`/question/${userComment.QuestionId}`} style={{color: 'black'}}>
+                                        {userComment.comment}
+                                        </Link>
+                                    </ListGroup.Item>
+                                    ))}
                                 </ListGroup>
                             </Card.Text>
                         </Card.Body>

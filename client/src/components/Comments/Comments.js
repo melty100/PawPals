@@ -1,10 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Card, Form, Button } from 'react-bootstrap'
+import { Link } from "react-router-dom";
 import { LikeButton, DislikeButton, FooterContents } from './CommentsElements'
 import API from "../../utils/API";
 
 const Comments = ({ comment }) => {
     const [count, setCount] = useState(comment.likes)
+    const [user, setUser] = useState({})
     
 
     // useEffect(() => {
@@ -24,6 +26,19 @@ const Comments = ({ comment }) => {
     
     // const userRef = useRef();
     // const [state, dispatch] = useStoreContext();
+
+    useEffect(() => {
+        loadUsers()
+    }, [])
+
+
+    function loadUsers() {
+        API.getUser(comment.UserId)
+            .then(res =>
+                setUser(res.data)
+            )
+            .catch(err => console.log(err));
+    };
     
     
 
@@ -31,7 +46,11 @@ const Comments = ({ comment }) => {
         <div>
             <Card >
                 <Card.Body>
-                    <Card.Title>@Username</Card.Title>
+                    <Card.Title>
+                        <Link to={`/profile/${user.id}`} style={{color: 'black'}}>
+                        {user.userName}
+                        </Link>
+                    </Card.Title>
                     <Card.Text className="px-5"> {comment.comment}</Card.Text>
 
                 </Card.Body>

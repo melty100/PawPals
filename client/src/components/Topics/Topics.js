@@ -8,61 +8,61 @@ const Topics = () => {
 
     return (
         <Container className='topicContainer'>
-            <Card className='my-3 p-3 rounded topic__card'>
+            <Card className='my-3 p-3 rounded topic__card' style={{ width: '18rem' }}>
 
-                <Card.Body>
+                <Card.Body >
                     <Card.Title style={{ textAlign: "center" }}><h3>Topics</h3></Card.Title>
                     <ListGroup variant='flush' >
 
                         <ListGroup.Item className="topic__list" >
-                            <Link to={`/topic/feeding`}>
+                            <Link to={`/topic/feeding`} style={{ textDecoration: "none" }}>
                                 <h5 >Feeding</h5>
                             </Link>
                         </ListGroup.Item>
 
 
                         <ListGroup.Item className="topic__list">
-                            <Link to={`/topic/potty training`}>
+                            <Link to={`/topic/potty training`} style={{ textDecoration: "none" }}>
                                 <h5>Potty Training</h5>
                             </Link>
                         </ListGroup.Item>
                         <ListGroup.Item className="topic__list">
-                            <Link to={`/topic/exercise`}>
+                            <Link to={`/topic/exercise`} style={{ textDecoration: "none" }}>
                                 <h5>Exercise</h5>
                             </Link>
                         </ListGroup.Item>
-                        <ListGroup.Item className="topic__list">
-                            <Link to={`/topic/toys`}>
+                        <ListGroup.Item className="topic__list" >
+                            <Link to={`/topic/toys`} style={{ textDecoration: "none" }}>
                                 <h5>Toys</h5>
                             </Link>
                         </ListGroup.Item>
                         <ListGroup.Item className="topic__list" >
-                            <Link to={`/topic/housing`}>
+                            <Link to={`/topic/housing`} style={{ textDecoration: "none" }}>
                                 <h5>Housing</h5>
                             </Link>
                         </ListGroup.Item>
                         <ListGroup.Item className="topic__list">
-                            <Link to={`/topic/small animals`}>
+                            <Link to={`/topic/small animals`} style={{ textDecoration: "none" }}>
                                 <h5>Small Animals</h5>
                             </Link>
                         </ListGroup.Item>
                         <ListGroup.Item className="topic__list">
-                            <Link to={`/topic/large animals`}>
+                            <Link to={`/topic/large animals`} style={{ textDecoration: "none" }}>
                                 <h5>Large Animals</h5>
                             </Link>
                         </ListGroup.Item>
                         <ListGroup.Item className="topic__list">
-                            <Link to={`/topic/reptiles`}>
+                            <Link to={`/topic/reptiles`} style={{ textDecoration: "none" }}>
                                 <h5>Reptiles</h5>
                             </Link>
                         </ListGroup.Item>
                         <ListGroup.Item className="topic__list">
-                            <Link to={`/topic/amphibians`}>
+                            <Link to={`/topic/amphibians`} style={{ textDecoration: "none" }}>
                             <h5>Amphibians</h5>
                             </Link>
                         </ListGroup.Item>
                     <ListGroup.Item className="topic__list">
-                        <Link to={`/topic/exotic pets`}>
+                        <Link to={`/topic/exotic pets`} style={{ textDecoration: "none" }}>
                             <h5>Exotic Pets</h5>
                         </Link>
                     </ListGroup.Item>

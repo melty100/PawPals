@@ -17,6 +17,12 @@ router.get('/getByQuestion/:id', function(req, res, next) {
     .catch(err => {res.status(422).end()});
 }); 
 
+router.get('/getUserComments/:UserId', function(req, res, next) {
+    db.Comment.findAll({where: {UserId : req.params.UserId}})
+    .then((dbComments) => res.send(dbComments))
+    .catch(err => {res.status(422).end()});
+}); 
+
 router.post('/postComment', function(req, res, next) {
     // res.send('respond with a resource');
     db.Comment.create({
