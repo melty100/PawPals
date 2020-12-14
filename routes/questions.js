@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var db = require("../models");
 const { Op } = require("sequelize");
-var isAuthenticated = require("../config/middleware/isAuthenticated");
 
 router.get('/getAll', function(req, res, next) {
     // res.send('respond with a resource');
