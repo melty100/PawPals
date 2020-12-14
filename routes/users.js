@@ -2,8 +2,6 @@ var express = require('express');
 var router = express.Router();
 var db = require("../models");
 var path = require("path");
-var passport = require("../config/passport");
-var isAuthenticated = require("../config/middleware/isAuthenticated");
 
 router.get('/getAll', function(req, res, next) {
     // res.send('respond with a resource');
@@ -41,7 +39,7 @@ router.post('/postUser', function(req, res, next) {
 });
 
 //NOTE: Different routes for changing password?
-router.put('/changeUser', isAuthenticated, function(req, res, next) {
+router.put('/changeUser', function(req, res, next) {
     db.User.update({
         email: req.body.email,
         userName: req.body.newUserName,
