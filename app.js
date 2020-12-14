@@ -12,6 +12,7 @@ var questionsRouter = require('./routes/questions');
 var commentsRouter = require('./routes/comments');
 var indexRouter = require('./routes/index');
 var authenticatedRouter = require('./routes/authenticatedRoutes');
+var passportRoutes = require('./routes/passportRoutes');
 
 const cors = require('cors')
 var db = require("./models");
@@ -37,6 +38,7 @@ app.use('/users', usersRouter);
 app.use('/questions', questionsRouter);
 app.use('/comments', commentsRouter);
 app.use('/authenticated', authenticatedRouter);
+app.use('/passport', passportRoutes);
 app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
