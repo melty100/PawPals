@@ -17,9 +17,7 @@ const CurrentProfile = () => {
     const lastNameRef = useRef();
     const petBioRef = useRef();
     const userBioRef = useRef();
-    const emailRef = useRef();
-    const usernameRef = useRef();
-    const passwordRef = useRef();
+    
 
     useEffect(() => {
         loadProfile()
@@ -27,18 +25,19 @@ const CurrentProfile = () => {
 
     useEffect(() => {
         loadUserQuestions()
-    }, [])
+    }, [profile.id])
 
     useEffect(() => {
         loadUserComments()
-    }, [])
+    }, [profile.id])
 
     // const { profileId } = useParams();
 
     function loadProfile() {
         API.getMyProfile()
             .then(res =>
-                setProfile(res.data)
+                // console.log(res.data)
+                setProfile(res.data[0])
             )
             .catch(err => console.log(err));
     };
@@ -46,6 +45,7 @@ const CurrentProfile = () => {
     function loadUserQuestions() {
         API.getUserQuestions(profile.id)
             .then(res =>
+                // console.log(res.data)
                 setUserQuestions(res.data)
             )
             .catch(err => console.log(err));
@@ -59,7 +59,29 @@ const CurrentProfile = () => {
             .catch(err => console.log(err));
     };
 
+    const handleSubmit = e => {
+        // e.preventDefault();
+        API.updateProfile({
+            userName: profile.userName,
+            firstName: firstNameRef.current.value,
+            lastName: lastNameRef.current.value,
+            petBio: petBioRef.current.value,
+            userBio: userBioRef.current.value
+        })
+            .then(result => console.log(result)
+                    
+                )
 
+            .catch(err => console.log(err));
+
+            firstNameRef.current.value = "";
+            lastNameRef.current.value = "";
+            petBioRef.current.value = "";
+            userBioRef.current.value = "";
+
+    };
+
+     console.log(profile)
     return (
         <div>
             <Row>
@@ -102,23 +124,9 @@ const CurrentProfile = () => {
                                         <Modal.Header closeButton>
                                             <Modal.Title>Edit your Profile: </Modal.Title>
                                         </Modal.Header>
-                                        <Form>
+                                        <Form onSubmit={handleSubmit}>
                                             <Modal.Body>
                                             <Form.Row>
-                                                    <Col>
-                                                        <Form.Label>email </Form.Label>
-                                                        <Form.Control placeholder="email" required ref={emailRef}/>
-                                                    </Col>
-                                                    <Col>
-                                                        <Form.Label>password </Form.Label>
-                                                        <Form.Control placeholder="pw" required ref={passwordRef}/>
-                                                    </Col>
-                                                    <Col>
-                                                        <Form.Label>userName </Form.Label>
-                                                        <Form.Control placeholder="un" required ref={usernameRef}/>
-                                                    </Col>
-                                                </Form.Row>
-                                                <Form.Row>
                                                     <Col>
                                                         <Form.Label>First Name </Form.Label>
                                                         <Form.Control placeholder="First name" required ref={firstNameRef}/>
@@ -128,6 +136,7 @@ const CurrentProfile = () => {
                                                         <Form.Control placeholder="Last name" required ref={lastNameRef}/>
                                                     </Col>
                                                 </Form.Row>
+                                            
 
                                                 <Form.Group controlId="AboutMeInput">
                                                     <Form.Label>About Me: </Form.Label>
@@ -137,19 +146,14 @@ const CurrentProfile = () => {
                                                     <Form.Label>My Pet: </Form.Label>
                                                     <Form.Control as="textarea" rows={3} ref={petBioRef}/>
                                                 </Form.Group>
-                                                <div className="mb-3">
-                                                    <Form.File id="formcheck-api-regular">
-                                                        <Form.File.Label>Upload a Picture of yourself</Form.File.Label>
-                                                        <Form.File.Input />
-                                                    </Form.File>
-                                                </div>
+                                                
 
 
 
 
                                             </Modal.Body>
                                             <Modal.Footer>
-                                                <Button variant="primary" type="submit">
+                                                <Button variant="primary" type="submit" onClick={() => setShow(false)}>
                                                     Submit
                                                 </Button>
                                             </Modal.Footer>

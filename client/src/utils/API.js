@@ -52,6 +52,12 @@ export default {
         return axios.post("/passport/register/", registerData)
     },
     getMyProfile: function (){
-        return axios.get("/users/api")
+        return axios.get("/users/api/")
+    },
+    updateProfile: function (username){
+        return axios.put("/users/changeUser/", username)
+    },
+    getMyQuestions: function (userId) {
+        return axios.get("/questions/myQuestions/", userId)
     }
 };
