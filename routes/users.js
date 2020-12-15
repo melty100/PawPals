@@ -45,14 +45,13 @@ router.post('/postUser', function(req, res, next) {
 //NOTE: Different routes for changing password?
 router.put('/changeUser', function(req, res, next) {
     db.User.update({
-        email: req.body.email,
-        userName: req.body.newUserName,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        petBio: req.body.petBio
+        petBio: req.body.petBio,
+        userBio: req.body.userBio,
     }, {
         where: {
-            username : req.body.oldUserName
+            userName : req.body.userName
         }
     })
     .then(() => {res.send("User updated")})
