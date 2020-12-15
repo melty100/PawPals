@@ -1,10 +1,13 @@
-var createError = require('http-errors');
-var express = require('express');
-var session = require("express-session");
-var passport = require("./passport/index");
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const session = require("express-session");
+const passport = require("./passport/index");
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const cookieSession = require('cookie-session');
+const cors = require('cors');
+const db = require('./models');
 const PORT = process.env.PORT || 8080;
 
 var usersRouter = require('./routes/users');
@@ -14,37 +17,15 @@ var indexRouter = require('./routes/index');
 var authenticatedRouter = require('./routes/authenticatedRoutes');
 var passportRoutes = require('./routes/passportRoutes');
 
-const cors = require('cors')
-var db = require("./models");
 
-var app = express();
+const app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-
-app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
-
-app.use(cors());
-
-app.use('/users', usersRouter);
-app.use('/questions', questionsRouter);
-app.use('/comments', commentsRouter);
-app.use('/authenticated', authenticatedRouter);
-app.use('/passport', passportRoutes);
-app.use('/', indexRouter);
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
 
 // error handler
 app.use(function(err, req, res, next) {
@@ -57,16 +38,24 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+app.use(cors());
+
 //Passport setup
 app.set('trust proxy', 1) // trust first proxy
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: true }
+app.use(cookieSession({
+  maxAge: 24 * 60 * 60 * 1000, // one day in miliseconds
+  name: 'session',
+  keys: ['key1', 'key2']
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use('/users', usersRouter);
+app.use('/questions', questionsRouter);
+app.use('/comments', commentsRouter);
+app.use('/authenticated', authenticatedRouter);
+app.use('/passport', passportRoutes);
+app.use('/', indexRouter);
 
 
 db.sequelize.sync().then(function() {

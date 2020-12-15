@@ -11,6 +11,11 @@ router.get('/getAll', function(req, res, next) {
 
 });
 
+router.get('/api', function(req, res, next) {
+    const username = req.session.passport.session;
+    res.json({username});
+})
+
 router.get('/getByUserName', function(req, res, next) {
 
     db.User.find({where: {userName: req.body.userName}})

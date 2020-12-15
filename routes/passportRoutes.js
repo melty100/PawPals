@@ -12,7 +12,16 @@ router.post('/login', (req, res, next) => {
                 message: error || "Something went wrong..."
             });
         }
-        return res.json(user);
+
+        req.logIn(user, function (error) {
+            if(error){
+                return res.status(500).json({
+                    message: error || "Uh oh, something went wrong..."
+                });
+            }
+        });
+
+        return res.json({user, isAuthenticated : true});
 
     })(req, res, next);
 });
