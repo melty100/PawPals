@@ -60,40 +60,7 @@ const MyProfile = () => {
             .catch(err => console.log(err));
     };
 
-    // const handleSubmit = e => {
-    //     e.preventDefault();
-    //     API.addProfile({
-    //         // email: req.body.email,
-    //         // password: req.body.password,
-    //         // userName: req.body.userName,
-    //         email: emailRef.current.value,
-    //         password: passwordRef.current.value,
-    //         userName: usernameRef.current.value,
-    //         firstName: firstNameRef.current.value,
-    //         lastName: lastNameRef.current.value,
-    //         petBio: petBioRef.current.value,
-    //         userBio: userBioRef.current.value,
-            
-
-    //         // userId: 
-    //         // user: userRef.current.value
-    //     })
-    //         // .then(result => loadProfile())
-    //         .then(result => console.log(result))
-
-    //         .catch(err => console.log(err));
-
-    //         emailRef.current.value = "";
-    //         passwordRef.current.value = "";
-    //         usernameRef.current.value = "";
-    //         firstNameRef.current.value = "";
-    //         lastNameRef.current.value = "";
-    //         petBioRef.current.value = "";
-    //         userBioRef.current.value = "";
-            
-
-
-    // };
+    
 
     return (
         <div>
@@ -130,9 +97,7 @@ const MyProfile = () => {
 
 
                                     <Button variant="danger" size="sm" style={{ height: 'max-content' }} onClick={handleShow}>
-                                        {/* <Link className='text-white' to='/edit-profile' style={{textDecoration: 'none'}}>
-                                            Edit Profile
-                                        </Link> */}
+                        
                                         Edit Profile
                                     </Button>
                                     <Modal show={show} onHide={handleClose}>

@@ -5,7 +5,7 @@ const { Sequelize } = require('../models');
 
 router.get('/getAll', function(req, res, next) {
     // res.send('respond with a resource');
-    db.Comment.findAll({})
+    db.Comment.findAll({order: [['updatedAt', 'DESC']]})
     .then((dbComments) => res.send(dbComments))
     .catch(err => res.status(422).end());
 

@@ -5,7 +5,7 @@ const { Op } = require("sequelize");
 
 router.get('/getAll', function(req, res, next) {
     // res.send('respond with a resource');
-    db.Question.findAll({})
+    db.Question.findAll({ order: [['updatedAt', 'DESC']]})
     .then((dbQuestions) => res.send(dbQuestions))
     .catch(err => res.status(422).json(err));
 });

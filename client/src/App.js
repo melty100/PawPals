@@ -12,7 +12,6 @@ import QuestionPage from './pages/QuestionPage'
 // import { Register } from './components/login/register'
 import LoginPage from './components/loginpage'
 import MyProfile from './pages/MyProfile/index.js'
-import { StoreProvider } from "./utils/GlobalState";
 import TopicPage from './pages/TopicPage'
 import SearchResults from './pages/SearchResults'
 
@@ -25,7 +24,7 @@ const App = () => {
   return (
     <div className='app__main'>
       <Router>
-        <StoreProvider>
+        
           <Header />
 
 
@@ -46,7 +45,7 @@ const App = () => {
             </Container>
           </main>
           <Footer />
-        </StoreProvider>
+       
 
       </Router>
     </div>

@@ -7,11 +7,7 @@ import API from "../../utils/API";
 const Comments = ({ comment }) => {
     const [count, setCount] = useState(comment.likes)
     const [user, setUser] = useState({})
-    
 
-    // useEffect(() => {
-        
-    // }, [])
     
     function increment() {
         API.likeComment(comment.id)
@@ -23,9 +19,6 @@ const Comments = ({ comment }) => {
         setCount(prevCount => prevCount - 1)
     }
 
-    
-    // const userRef = useRef();
-    // const [state, dispatch] = useStoreContext();
 
     useEffect(() => {
         loadUsers()

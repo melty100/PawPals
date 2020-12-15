@@ -1,5 +1,6 @@
 var passport = require('../passport/index');   
 var express = require('express');
+var db = require('../models');
 var router = express.Router();
 
 
@@ -30,16 +31,24 @@ router.post('/register', (req, res, next) => {
 
     passport.authenticate('local-register', function(error, user, info){
 
-        if(!user) {
+        if(error) {
             return res.status(500).json({
                 message: error || "something went wrong..."
             });
         }
 
-        console.log(user);
-
-        return res.json({
-            message: "User is now authenticated"
+        db.User.create({
+            userName: req.body.userName,
+            email : req.body.email,
+            password : req.body.password
+        }).then(dbRes => {
+            return res.json({
+                message: "User is now authenticated"
+            });
+        }).catch(err => {
+            return res.status(500).json({
+                message: err || "something went wrong."
+            })
         });
         
     })(req, res, next);

@@ -2,34 +2,15 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Card, Badge } from 'react-bootstrap'
 import { FaRegComments } from 'react-icons/fa'
-import { useStoreContext } from "../../utils/GlobalState";
-import { UPDATE_POSTS, LOADING } from "../../utils/actions";
+import { format, formatDistanceToNow } from 'date-fns';
 import API from "../../utils/API";
 import './style.css'
 
 
 const AllQuestions = ({ post }) => {
 
-    // const [state, dispatch] = useStoreContext();
-    const [user, setUser] = useState({})
-
-    // useEffect(() => {
-    //     getPosts();
-    // }, []);
-
     
-
-    // const getPosts = () => {
-    //     dispatch({ type: LOADING });
-    //     API.getPosts()
-    //         .then(results => {
-    //             dispatch({
-    //                 type: UPDATE_POSTS,
-    //                 posts: results.data
-    //             });
-    //         })
-    //         .catch(err => console.log(err));
-    // };
+    const [user, setUser] = useState({})
 
     useEffect(() => {
         loadUsers()
@@ -44,20 +25,27 @@ const AllQuestions = ({ post }) => {
             .catch(err => console.log(err));
     };
 
+    const questionDate = formatDistanceToNow(new Date(post.createdAt))
+    console.log(questionDate)
 
 
     return (
         <div>
-            {/* {state.posts.map(post => ( */}
+            
                 <Card key={post.id} className='my-3 rounded questionCard' >
-                    <Card.Header>
-                        <small className="text-muted">
-                            Posted by: 
-                            <Link to={`/profile/${user.id}`}>
-                            {user.userName} 
+                    <Card.Header className="questionDiv">
+                        {/* <small className="text-muted"> */}
+                        <div style={{fontSize: "22px"}}>
+                            Posted by:{' '}
+                            <Link to={`/profile/${user.id}`} style={{fontWeight: "bold", fontSize: "22px",color: "green"}}>
+                             { user.userName} 
                             </Link>
-                            {post.createdAt}
-                        </small>
+                        </div>
+                        <div>
+                            {questionDate} ago
+                        </div>
+                            
+                        {/* </small> */}
                     </Card.Header>
                     <Card.Body>
                         <Link to={`/question/${post.id}`} style={{ textDecoration: "none" }}>
@@ -77,8 +65,6 @@ const AllQuestions = ({ post }) => {
                         </div>
                     </Card.Footer>
                 </Card>
-
-            {/* ))} */}
 
         </div>
     )
