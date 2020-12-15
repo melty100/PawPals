@@ -110,13 +110,13 @@ const CurrentProfile = () => {
                                     style={{
                                         display: 'flex',
                                         flexDirection: 'row',
-                                        justifyContent: 'space-between'
+                                        justifyContent: 'space-around'
                                     }}
                                 >
                                     <Card.Title><h2>{profile.firstName} {profile.lastName}</h2></Card.Title>
 
 
-                                    <Button variant="danger" size="sm" style={{ height: 'max-content' }} onClick={handleShow}>
+                                    <Button variant="danger" size="sm" style={{ height: 'max-content', marginLeft: "20px" }} onClick={handleShow}>
                         
                                         Edit Profile
                                     </Button>

@@ -21,6 +21,10 @@ const Header = () => {
                 
                 <Link to="/login">
                     <Button variant="outline-info">Login</Button>
+                    {" "}
+                </Link>
+                <Link to="/register">
+                    <Button variant="outline-info">Register</Button>
                 </Link>
             </Navbar>
         </>

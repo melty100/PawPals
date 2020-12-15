@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Card, Form, Button } from 'react-bootstrap'
 import { Link } from "react-router-dom";
+import { format, formatDistanceToNow } from 'date-fns';
 import { LikeButton, DislikeButton, FooterContents } from './CommentsElements'
 import API from "../../utils/API";
 
@@ -33,7 +34,7 @@ const Comments = ({ comment }) => {
             .catch(err => console.log(err));
     };
     
-    
+    const commentDate = formatDistanceToNow(new Date(comment.createdAt))
 
     return (
         <div>
@@ -49,7 +50,7 @@ const Comments = ({ comment }) => {
                 </Card.Body>
                 <Card.Footer>
                     <FooterContents>
-                        <small className="text-muted">Posted: 20 minutes ago</small>
+                        <small className="text-muted">Posted: {commentDate}</small>
                         <div>
                             <LikeButton onClick={increment} />
                             <span>{count}</span>

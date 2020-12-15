@@ -30,9 +30,8 @@ export default {
     },
 
     addComment: function (commentData) {
-        return axios.post("/comments/postComment", commentData)
+        return axios.post("/authenticated/postComment/", commentData)
     },
-
     getUser: function (id) {
         return axios.get("/users/" + id)
     },
