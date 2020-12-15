@@ -5,7 +5,8 @@ import API from '../../utils/API'
 
 const Register = () => {
 
-    const [regData, setRegData] = useState({})
+    const [regData, setRegData] = useState({});
+    const [validReg, setValidReg] = useState("");
     const userNameRef = useRef();
     const emailRef = useRef();
     const passwordRef = useRef();
@@ -22,23 +23,14 @@ const Register = () => {
             password: passwordRef.current.value,
             lastName: lastNameRef.current.value,
             firstName: firstNameRef.current.value
-
-
-            // userId: 
-            // user: userRef.current.value
         })
             .then(result => {
-                if(result.status === 200){
-                    HandleRedirect();
-                } else {
-                    console.log("WROOOONG");
-                }
-                
-                
 
-            })
-
-            .catch(err => console.log(err));
+                setValidReg("Account created!");
+            }).catch(err => {
+                console.log(err);
+                setValidReg(err);
+            });
 
         userNameRef.current.value = "";
         emailRef.current.value = "";
@@ -47,28 +39,6 @@ const Register = () => {
         firstNameRef.current.value = "";
 
     };
-
-    function HandleRedirect(){
-        // e.preventDefault();
-        
-        // console.log("REDIRECTED");
-        return <div>
-            <p></p>
-        </div>
-            // return <Alert variant = "success" >
-            //                  This is a alert with{' '}
-            //                  <Alert.Link to={"login"}>an example link</Alert.Link>. Give it a click if you
-            //                like.
-            //                           </div>
-        
-        // {regData === 200 ? <Alert variant = "success" >
-        //                     This is a alert with{' '}
-        //                     <Link to={"login"}>an example link</Link>. Give it a click if you
-        //                     like.
-        //                             </Alert>
-        //                             : console.log("WRONG")}
-    }
-
 
     return (
         <div style={{ display: "flex", justifyContent: "center" }}>
@@ -104,6 +74,7 @@ const Register = () => {
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" placeholder="Password" required ref={passwordRef} />
                         </Form.Group>
+                        <p>{`${validReg}`}</p>
 
                         <Button variant="primary" type="submit" onClick={handleSubmit}>
                             Submit
