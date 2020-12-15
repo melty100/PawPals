@@ -7,6 +7,7 @@
   .header {
     font-size: 10px;
     font-family: "Open Sans", sans-serif;
+    // position: absolute;
   }
   
   .headerChunk{
@@ -16,28 +17,33 @@
   .content {
     display: flex;
     flex-direction: column;
+    
 
     .image {
       width: 18em;
+      z-index: -1;
       img {
         width:70%;
-        height: 70%;
-        margin-bottom: 10px;
+        height: 60%;
+        // position: absolute;
+        
+        
       }
     }
 
     .form {
      
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      // display: flex;
+      // flex-direction: column;
+      // align-items: center;
+      top: 100px;
 
       .form-group {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         width: fit-content;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         label {
           font-size: 20px;
         }

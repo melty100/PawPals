@@ -32,7 +32,8 @@ class Register extends React.Component {
                 </div>
             </div>
             <div className="footer">
-                {/* <button type="button btn success" className="btn">Register</button> */}
+            
+                <button type="button btn success" className="btn">Register</button>
             </div>
         </div>
         );
