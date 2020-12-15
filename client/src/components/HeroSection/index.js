@@ -4,15 +4,18 @@ import { Modal, Form } from 'react-bootstrap'
 import { Button } from '../ButtonElement'
 import { HeroContainer, HeroBg, ImageBg, HeroContent, HeroH1, HeroP, HeroBtnWrapper, QuestionEmpty, QuestionFilled } from './HeroElements';
 
-const HeroSection = ({ handleSubmit, questionRef, contentRef, topicRef }) => {
+const HeroSection = ({ handleSubmit, questionRef, contentRef, topicRef, notLoggedIn }) => {
     const [hover, setHover] = useState(false)
     const [show, setShow] = useState(false);
+   
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const onHover = () => {
         setHover(!hover)
     }
+
+    
 
     // const questionRef = useRef();
     // const contentRef = useRef();
@@ -61,17 +64,19 @@ const HeroSection = ({ handleSubmit, questionRef, contentRef, topicRef }) => {
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Ask the Project 3 community a question!</Modal.Title>
+                    
                 </Modal.Header>
                 <Form onSubmit={handleSubmit}>
                     <Modal.Body>
 
+
                         <Form.Group controlId="UserQuestionInput">
                             <Form.Label>What would you like to ask?</Form.Label>
-                            <Form.Control type="text" required ref={questionRef}/>
+                            <Form.Control type="text" required ref={questionRef} />
                         </Form.Group>
                         <Form.Group controlId="exampleForm.ControlTextarea1">
                             <Form.Label>Anymore information you would like to add?</Form.Label>
-                            <Form.Control as="textarea" rows={3} required ref={contentRef}/>
+                            <Form.Control as="textarea" rows={3} required ref={contentRef} />
                         </Form.Group>
                         <Form.Group controlId="exampleForm.ControlSelect1">
                             <Form.Label>Topic</Form.Label>
@@ -94,7 +99,8 @@ const HeroSection = ({ handleSubmit, questionRef, contentRef, topicRef }) => {
 
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="primary" type="submit">
+                        
+                        <Button variant="primary" type="submit"  onClick={() => setShow(false)}>
                             Submit
                         </Button>
                     </Modal.Footer>

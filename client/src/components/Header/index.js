@@ -19,9 +19,9 @@ const Header = () => {
                     
                 </Nav>
                 
-                
+                <Link to="/login">
                     <Button variant="outline-info">Login</Button>
-                
+                </Link>
             </Navbar>
         </>
     )

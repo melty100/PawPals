@@ -11,9 +11,9 @@ const Search = ({ handleInputChange, handleFormSubmit, questionSearch }) => {
                     <Form inline>
                         <Form.Control type="text" placeholder="Search" className="mr-sm-2" value={questionSearch} onChange={handleInputChange} />
                         <Button variant="outline-success" size="sm" type="submit" onClick={handleFormSubmit}>
-                            <Link to={`/searchresults/`}>
+                            {/* <Link to={`/searchresults/`}> */}
                                 <SearchButton />
-                            </Link>
+                            {/* </Link> */}
                         </Button>
 
 

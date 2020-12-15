@@ -9,6 +9,7 @@ import API from '../utils/API'
 const TopicPage = () => {
 
     const [questions, setQuestions] = useState([])
+    const [questionSearch, setQuestionSearch] = useState("");
     // const userRef = useRef();
    
     const { topic } = useParams()
@@ -25,6 +26,22 @@ const TopicPage = () => {
             .catch(err => console.log(err));
     };
 
+    const handleInputChange = event => {
+        // Destructure the name and value properties off of event.target
+        // Update the appropriate state
+        const { value } = event.target;
+        setQuestionSearch(value);
+      };
+    
+      const handleFormSubmit = event => {
+        
+        event.preventDefault();
+        API.searchPosts(questionSearch)
+        //   .then(res => setQuestions(res.data))
+        .then(res => setQuestions(res.data))
+          .catch(err => console.log(err));
+      };
+
     
 
     return (
@@ -38,8 +55,8 @@ const TopicPage = () => {
                     </Col>
                     
                     <Col sm={4}>
-                        <Search />
-                        <Topics topic={topic} onClick={loadQuestions}/>
+                        <Search handleInputChange={handleInputChange} handleFormSubmit={handleFormSubmit} questionSearch={questionSearch}/>
+                        <Topics topic={topic} onClick={loadQuestions} />
                     </Col>
                     
                 </Row>

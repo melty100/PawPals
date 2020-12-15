@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { Row, Col, Container } from 'react-bootstrap'
+import { Row, Col, Container, Alert, Button } from 'react-bootstrap'
 import HeroSection from '../../components/HeroSection/'
 import AllQuestions from '../../components/AllQuestions.js'
 import API from '../../utils/API'
@@ -31,6 +31,7 @@ const HomePage = () => {
             )
             .catch(err => console.log(err));
     };
+    
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -66,20 +67,34 @@ const HomePage = () => {
       };
     
       const handleFormSubmit = event => {
-        // When the form is submitted, prevent its default behavior, get recipes update the recipes state
+        
         event.preventDefault();
         API.searchPosts(questionSearch)
         //   .then(res => setQuestions(res.data))
-        .then(res => console.log(res.data))
+        .then(res => setQuestions(res.data))
           .catch(err => console.log(err));
       };
+
+      function AlertDismissibleExample() {
+        const [alertShow, setAlertShow] = useState(true);
+      
+        if (alertShow) {
+          return (
+            <Alert variant="danger" onClose={() => setAlertShow(false)} dismissible>
+              You must be logged in to do that.
+            </Alert>
+          );
+        }
+        return <Button onClick={() => setAlertShow(false)}/>
+      }
 
 
     return (
         <>
-            <HeroSection handleSubmit={handleSubmit} questionRef={questionRef} contentRef={contentRef} topicRef={topicRef} />
+            <HeroSection notLoggedIn={notLoggedIn} handleSubmit={handleSubmit} questionRef={questionRef} contentRef={contentRef} topicRef={topicRef} />
             {/* <div className="home_container"> */}
-            {notLoggedIn && <Redirect to="/login"/>}
+            {/* {notLoggedIn && <Redirect to="/login"/>} */}
+            {notLoggedIn && <AlertDismissibleExample />}
             <Container>
                 <Row>
                     <Col  sm={8}>

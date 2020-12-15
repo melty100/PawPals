@@ -19,20 +19,16 @@ const QuestionPage = (props) => {
     const commentRef = useRef();
 
     const { id } = useParams()
-
     useEffect(() => {
-        async function getThisPost (){
-         await API.getPost(id)
+        API.getPost(id)
             .then(res => setQuestion(res.data))
             .catch(err => console.log(err))
-        }
-
-        getThisPost();
     }, [])
 
     useEffect(() => {
         loadUsers()
     }, [])
+
 
     function loadUsers() {
         API.getUser(question.UserId)
@@ -41,10 +37,6 @@ const QuestionPage = (props) => {
             )
             .catch(err => console.log(err));
     };
-
-    
-
-   
 
     useEffect(() => {
         loadComments()
@@ -73,9 +65,6 @@ const QuestionPage = (props) => {
         commentRef.current.value = "";
 
     };
-
-    
-
 
     
 
@@ -112,7 +101,7 @@ const QuestionPage = (props) => {
                         ))}
                     </Col>
                     <Col sm={4}>
-                        <Search />
+                        {/* <Search /> */}
                         <Topics />
                     </Col>
                 </Row>
