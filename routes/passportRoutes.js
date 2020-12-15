@@ -40,7 +40,9 @@ router.post('/register', (req, res, next) => {
         db.User.create({
             userName: req.body.userName,
             email : req.body.email,
-            password : req.body.password
+            password : req.body.password,
+            lastName : req.body.lastName,
+            firstName : req.body.firstName
         }).then(dbRes => {
             return res.json({
                 message: "User is now authenticated"
