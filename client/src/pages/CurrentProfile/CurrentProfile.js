@@ -4,8 +4,7 @@ import PlaceholderImg from '../../images/profile-placeholder.png'
 import { Card, Row, Col, ListGroup, Button, Modal, Form } from 'react-bootstrap'
 import API from '../../utils/API'
 
-
-const MyProfile = () => {
+const CurrentProfile = () => {
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -34,10 +33,10 @@ const MyProfile = () => {
         loadUserComments()
     }, [])
 
-    const { profileId } = useParams();
+    // const { profileId } = useParams();
 
     function loadProfile() {
-        API.getUser(profileId)
+        API.getMyProfile()
             .then(res =>
                 setProfile(res.data)
             )
@@ -45,7 +44,7 @@ const MyProfile = () => {
     };
 
     function loadUserQuestions() {
-        API.getUserQuestions(profileId)
+        API.getUserQuestions(profile.id)
             .then(res =>
                 setUserQuestions(res.data)
             )
@@ -53,14 +52,13 @@ const MyProfile = () => {
     };
 
     function loadUserComments() {
-        API.getUserComments(profileId)
+        API.getUserComments(profile.id)
             .then(res =>
                 setUserComments(res.data)
             )
             .catch(err => console.log(err));
     };
 
-    
 
     return (
         <div>
@@ -96,7 +94,7 @@ const MyProfile = () => {
                                     <Card.Title><h2>{profile.firstName} {profile.lastName}</h2></Card.Title>
 
 
-                                    {/* <Button variant="danger" size="sm" style={{ height: 'max-content' }} onClick={handleShow}>
+                                    <Button variant="danger" size="sm" style={{ height: 'max-content' }} onClick={handleShow}>
                         
                                         Edit Profile
                                     </Button>
@@ -156,7 +154,7 @@ const MyProfile = () => {
                                                 </Button>
                                             </Modal.Footer>
                                         </Form>
-                                    </Modal> */}
+                                    </Modal>
 
                                 </div>
 
@@ -223,4 +221,4 @@ const MyProfile = () => {
     )
 }
 
-export default MyProfile
+export default CurrentProfile

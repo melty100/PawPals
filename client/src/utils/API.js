@@ -47,5 +47,11 @@ export default {
     },
     userLogin: function (loginData) {
         return axios.post("/passport/login/", loginData)
+    },
+    userRegister: function (registerData) {
+        return axios.post("/passport/register/", registerData)
+    },
+    getMyProfile: function (){
+        return axios.get("/users/api")
     }
 };

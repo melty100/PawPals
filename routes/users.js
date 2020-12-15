@@ -12,8 +12,7 @@ router.get('/getAll', function(req, res, next) {
 });
 
 router.get('/api', function(req, res, next) {
-    const username = req.session.passport.session;
-    res.json({username});
+    res.json(req.user);
 })
 
 router.get('/getByUserName', function(req, res, next) {

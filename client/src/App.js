@@ -16,6 +16,7 @@ import Register from './pages/Register/Register'
 import MyProfile from './pages/MyProfile/index.js'
 import TopicPage from './pages/TopicPage'
 import SearchResults from './pages/SearchResults'
+import CurrentProfile from './pages/CurrentProfile/CurrentProfile'
 
 
 
@@ -36,6 +37,7 @@ const App = () => {
 
               <Route exact path="/question/:id" component={QuestionPage} />
               <Route path="/profile/:profileId" component={MyProfile} exact/>
+              <Route path="/myprofile" component={CurrentProfile} exact/>
               <Route path="/topic/:topic" component={TopicPage} exact/>
               <Route path="/searchresults" component={SearchResults} exact/>
               <Route path="/login" component={Login} exact/>
