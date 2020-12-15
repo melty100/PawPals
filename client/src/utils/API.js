@@ -44,5 +44,8 @@ export default {
     },
     getUserComments: function (id) {
         return axios.get("/comments/getUserComments/" + id)
+    },
+    userLogin: function (loginData) {
+        return axios.post("/passport/login/", loginData)
     }
 };

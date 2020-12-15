@@ -1,28 +1,71 @@
 import React from "react";
 import loginImg from "./dog.svg";
+import API from "../../utils/API"
 
 class Login extends React.Component {
     constructor(props) {
         super(props);
     }
 
+    state = {
+        userName: "",
+        password: ""
+
+    };
+
+    handleInputChange = event => {
+        let value = event.target.value;
+        const name = event.target.name;
+
+        this.setState({
+            [name]: value
+        });
+        // this.setState({ username: event.target.value });
+    };
+
+
+    handleSubmit = e => {
+        e.preventDefault();
+        API.userLogin({
+            userName: this.state.userName,
+            password: this.state.password
+            // userId: 
+            // user: userRef.current.value
+        })
+            .then(result => console.log(result))
+
+            .catch(err => console.log(err));
+
+        this.setState({
+            userName: "",
+            password: ""
+        });
+        
+
+    };
+
+
+
+
+
     render() {
         return (<div className="base-container" ref={this.props.containerRef}>
-            
+
             <div className="content">
-            <div className="header"><h2>Login</h2></div>
+                <div className="header"><h2>Login</h2></div>
                 <div className="image">
                     <img src={loginImg} alt="pup" />
                 </div>
                 <div className="form">
                     <div className="form-group">
                         <label htmlFor="username">Username</label>
-                        <input type="text" name="username" placeholder="username" />
+                        <input type="text" name="userName" placeholder="username" value={this.state.userName} onChange={this.handleInputChange} />
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Password</label>
-                        <input type="password" name="password" placeholder="password" />
+                        <input type="password" name="password" placeholder="password" value={this.state.password} onChange={this.handleInputChange} />
                     </div>
+                    <button type="submit" onClick={this.handleSubmit}>Login</button>
                 </div>
             </div>
             <div className="footer">

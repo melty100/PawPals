@@ -3,12 +3,19 @@
     
 }
 
+.questionDiv {
+    display: flex;
+    justify-content: space-between;
+}
+
 .questionTitle {
     font-size: 35px;
     display: flex;
     justify-content: center;
     padding-bottom: 15px;
 }
+
+
 
 .questionText {
     display: flex;

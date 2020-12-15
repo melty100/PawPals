@@ -25,24 +25,7 @@ const TopicPage = () => {
             .catch(err => console.log(err));
     };
 
-    // const handleSubmit = e => {
-    //     e.preventDefault();
-    //     API.addPost({
-    //         question: questionRef.current.value,
-    //         content: contentRef.current.value,
-    //         topic: topicRef.current.value,
-    //         // userId: 
-    //         // user: userRef.current.value
-    //     })
-    //         .then(result => loadQuestions())
-
-    //         .catch(err => console.log(err));
-
-    //     questionRef.current.value = "";
-    //     contentRef.current.value = "";
-    //     topicRef.current.value = "";
-
-    // };
+    
 
     return (
         <div>
@@ -53,12 +36,12 @@ const TopicPage = () => {
                         <AllQuestions post={question}/>
                         ))}
                     </Col>
-                    {/* <div className="topic_contianer"> */}
+                    
                     <Col sm={4}>
                         <Search />
                         <Topics topic={topic} onClick={loadQuestions}/>
                     </Col>
-                    {/* </div> */}
+                    
                 </Row>
             </Container>
         </div>

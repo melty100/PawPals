@@ -1,7 +1,4 @@
 import React, { useState, useRef } from 'react'
-import { useStoreContext } from "../../utils/GlobalState";
-import { ADD_POST, LOADING } from "../../utils/actions";
-import API from "../../utils/API";
 import HeroImage from '../../images/dogBG3.jpg'
 import { Modal, Form } from 'react-bootstrap'
 import { Button } from '../ButtonElement'

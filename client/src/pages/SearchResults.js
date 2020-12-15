@@ -10,14 +10,13 @@ const SearchResults = () => {
     const [questionSearch, setQuestionSearch] = useState("");
 
     const handleInputChange = event => {
-        // Destructure the name and value properties off of event.target
-        // Update the appropriate state
+        
         const { value } = event.target;
         setQuestionSearch(value);
       };
     
       const handleFormSubmit = event => {
-        // When the form is submitted, prevent its default behavior, get recipes update the recipes state
+        
         event.preventDefault();
         API.searchPosts(questionSearch)
           .then(res => setQuestions(res.data))
@@ -35,12 +34,12 @@ const SearchResults = () => {
                             <AllQuestions post={question} />
                         ))}
                     </Col>
-                    {/* <div className="topic_contianer"> */}
+                    
                     <Col sm={4}>
                         <Search handleInputChange={handleInputChange} handleFormSubmit={handleFormSubmit} questionSearch={questionSearch}/>
                         <Topics />
                     </Col>
-                    {/* </div> */}
+                   
                 </Row>
             </Container>
         </div>

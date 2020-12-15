@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Row, Col, Card } from 'react-bootstrap'
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import { format, formatDistanceToNow } from 'date-fns';
 // import Header from '../components/Header'
 import Topics from '../components/Topics/Topics'
 import Search from '../components/Search/Search'
@@ -18,11 +19,32 @@ const QuestionPage = (props) => {
     const commentRef = useRef();
 
     const { id } = useParams()
+
     useEffect(() => {
-        API.getPost(id)
+        async function getThisPost (){
+         await API.getPost(id)
             .then(res => setQuestion(res.data))
             .catch(err => console.log(err))
+        }
+
+        getThisPost();
     }, [])
+
+    useEffect(() => {
+        loadUsers()
+    }, [])
+
+    function loadUsers() {
+        API.getUser(question.UserId)
+            .then(res =>
+                setUser(res.data)
+            )
+            .catch(err => console.log(err));
+    };
+
+    
+
+   
 
     useEffect(() => {
         loadComments()
@@ -52,23 +74,14 @@ const QuestionPage = (props) => {
 
     };
 
-    useEffect(() => {
-        loadUsers()
-    }, [])
-
-
-    function loadUsers() {
-        API.getUser(question.UserId)
-            .then(res =>
-                setUser(res.data)
-            )
-            .catch(err => console.log(err));
-    };
-
-
+    
 
 
     
+
+    // const questionPageDate = formatDistanceToNow(new Date(question.createdAt));
+    // console.log(questionPageDate)
+
 
 
     return (
@@ -78,7 +91,14 @@ const QuestionPage = (props) => {
                 <Row>
                     <Col sm={8}>
                         <Card className='my-3 rounded questionCard' >
-                            <Card.Header><small className="text-muted">Posted By: {user.userName} {question.createdAt}</small></Card.Header>
+                            <Card.Header>
+                                <div style={{ fontSize: "22px" }}>
+                                    Posted by:{' '}
+                                    <Link to={`/profile/${user.id}`} style={{ fontWeight: "bold", fontSize: "22px", color: "green" }}>
+                                        {user.userName}
+                                    </Link>
+                                </div>
+                                </Card.Header>
                             <Card.Body>
                                 <Card.Title as='div' className="questionTitle">{question.question}</Card.Title>
                                 <Card.Text as='div' className="questionText px-3">
@@ -86,9 +106,9 @@ const QuestionPage = (props) => {
                                 </Card.Text>
                             </Card.Body>
                         </Card>
-                        <CommentForm handleSubmit={handleSubmit} commentRef={commentRef}/>
+                        <CommentForm handleSubmit={handleSubmit} commentRef={commentRef} />
                         {comments.map(comment => (
-                        <Comments questionId={question.id} comment={comment} />
+                            <Comments questionId={question.id} comment={comment} />
                         ))}
                     </Col>
                     <Col sm={4}>
