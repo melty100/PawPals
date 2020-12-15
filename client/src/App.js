@@ -8,9 +8,11 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import HomePage from './pages/Homepage/HomePage'
 import QuestionPage from './pages/QuestionPage'
+import Login from './pages/Login/Login'
+import Register from './pages/Register/Register'
 // import { Login } from './components/login/login'
 // import { Register } from './components/login/register'
-import LoginPage from './components/loginpage'
+// import LoginPage from './components/loginpage'
 import MyProfile from './pages/MyProfile/index.js'
 import TopicPage from './pages/TopicPage'
 import SearchResults from './pages/SearchResults'
@@ -36,8 +38,12 @@ const App = () => {
               <Route path="/profile/:profileId" component={MyProfile} exact/>
               <Route path="/topic/:topic" component={TopicPage} exact/>
               <Route path="/searchresults" component={SearchResults} exact/>
+              <Route path="/login" component={Login} exact/>
+              <Route path="/register" component={Register} exact/>
 
-              <Route path='/login' component={LoginPage} exact />
+
+
+              {/* <Route path='/login' component={LoginPage} exact /> */}
               {/* <Route path='/login' component={Register} exact />
               <Route path='/login' component={Login} exact /> */}
 
