@@ -25,11 +25,11 @@ const CurrentProfile = () => {
 
     useEffect(() => {
         loadUserQuestions()
-    }, [])
+    }, [profile.id])
 
     useEffect(() => {
         loadUserComments()
-    }, [])
+    }, [profile.id])
 
     // const { profileId } = useParams();
 
@@ -45,8 +45,8 @@ const CurrentProfile = () => {
     function loadUserQuestions() {
         API.getUserQuestions(profile.id)
             .then(res =>
-                console.log(res.data)
-                // setUserQuestions(res.data)
+                // console.log(res.data)
+                setUserQuestions(res.data)
             )
             .catch(err => console.log(err));
     };
