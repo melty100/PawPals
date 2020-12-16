@@ -14,7 +14,7 @@ const AllQuestions = ({ post }) => {
 
     useEffect(() => {
         loadUsers()
-    }, [])
+    }, [post.UserId])
 
 
     function loadUsers() {

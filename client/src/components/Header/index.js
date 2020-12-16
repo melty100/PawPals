@@ -21,6 +21,13 @@ const Header = () => {
                 
                 <Link to="/login">
                     <Button variant="outline-info">Login</Button>
+                    {" "}
+                </Link>
+                <Link to="/register">
+                    <Button className="ml-3" variant="outline-info">Register</Button>
+                </Link>
+                <Link to="/login">
+                    <Button className="ml-3" variant="outline-info">Logout</Button>
                 </Link>
             </Navbar>
         </>

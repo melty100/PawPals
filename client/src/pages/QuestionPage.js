@@ -15,18 +15,23 @@ const QuestionPage = (props) => {
 
     const [question, setQuestion] = useState({})
     const [comments, setComments] = useState([])
+    const [currentUser, setCurrentUser] = useState([]);
     const [user, setUser] = useState({})
     const commentRef = useRef();
 
-    const { id } = useParams()
+    const { currentQuestionId } = useParams()
     useEffect(() => {
-        API.getPost(id)
+        API.getPost(currentQuestionId)
             .then(res => setQuestion(res.data))
             .catch(err => console.log(err))
     }, [])
 
     useEffect(() => {
         loadUsers()
+    }, [])
+
+    useEffect(() => {
+        loadCurrentUser()
     }, [])
 
 
@@ -42,8 +47,17 @@ const QuestionPage = (props) => {
         loadComments()
     }, [])
 
+    function loadCurrentUser() {
+        API.getMyProfile()
+            .then(res =>
+                setCurrentUser(res.data[0])
+            )
+            .catch(err => console.log(err));
+    };
+
+
     function loadComments() {
-        API.getCommentsById(id)
+        API.getCommentsById(currentQuestionId)
             .then(res =>
                 setComments(res.data)
             )
@@ -54,8 +68,9 @@ const QuestionPage = (props) => {
     const handleSubmit = e => {
         e.preventDefault();
         API.addComment({
-            likes: commentRef.current.value,
-            QuestionId: id,
+            comment: commentRef.current.value,
+            QuestionId: currentQuestionId,
+            UserId: currentUser.id
             // user: userRef.current.value
         })
             .then(result => loadComments())

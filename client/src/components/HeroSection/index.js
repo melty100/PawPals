@@ -4,7 +4,7 @@ import { Modal, Form } from 'react-bootstrap'
 import { Button } from '../ButtonElement'
 import { HeroContainer, HeroBg, ImageBg, HeroContent, HeroH1, HeroP, HeroBtnWrapper, QuestionEmpty, QuestionFilled } from './HeroElements';
 
-const HeroSection = ({ handleSubmit, questionRef, contentRef, topicRef, notLoggedIn }) => {
+const HeroSection = ({ handleSubmit, questionRef, contentRef, topicRef, currentUser }) => {
     const [hover, setHover] = useState(false)
     const [show, setShow] = useState(false);
    

@@ -15,13 +15,19 @@ const HomePage = () => {
     const [questions, setQuestions] = useState([])
     const [questionSearch, setQuestionSearch] = useState("");
     const [notLoggedIn, setNotLoggedIn] = useState(false);
+    const [currentUser, setCurrentUser] = useState([]);
     const questionRef = useRef();
     const contentRef = useRef();
     // const userRef = useRef();
     const topicRef = useRef();
+    
 
     useEffect(() => {
         loadQuestions()
+    }, [questions.UserId])
+
+    useEffect(() => {
+        loadCurrentUser()
     }, [])
 
     function loadQuestions() {
@@ -32,6 +38,13 @@ const HomePage = () => {
             .catch(err => console.log(err));
     };
     
+    function loadCurrentUser() {
+        API.getMyProfile()
+            .then(res =>
+                setCurrentUser(res.data[0])
+            )
+            .catch(err => console.log(err));
+    };
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -39,16 +52,11 @@ const HomePage = () => {
             question: questionRef.current.value,
             content: contentRef.current.value,
             topic: topicRef.current.value,
-            // userId: 
+            UserId: currentUser.id
             // user: userRef.current.value
         })
             .then(result => {
-                    if(result.loggedIn){
-                        loadQuestions();
-                    }
-                    else {
-                        setNotLoggedIn(true);
-                    }
+                    loadQuestions();
                 })
 
             .catch(err => console.log(err));
@@ -56,6 +64,7 @@ const HomePage = () => {
         questionRef.current.value = "";
         contentRef.current.value = "";
         topicRef.current.value = "";
+        
 
     };
 
@@ -88,10 +97,12 @@ const HomePage = () => {
         return <Button onClick={() => setAlertShow(false)}/>
       }
 
+    //   console.log()
+
 
     return (
         <>
-            <HeroSection notLoggedIn={notLoggedIn} handleSubmit={handleSubmit} questionRef={questionRef} contentRef={contentRef} topicRef={topicRef} />
+            <HeroSection currentUser={currentUser} handleSubmit={handleSubmit} questionRef={questionRef} contentRef={contentRef} topicRef={topicRef} />
             {/* <div className="home_container"> */}
             {/* {notLoggedIn && <Redirect to="/login"/>} */}
             {notLoggedIn && <AlertDismissibleExample />}
@@ -99,7 +110,7 @@ const HomePage = () => {
                 <Row>
                     <Col  sm={8}>
                         {questions.map(question => (
-                        <AllQuestions post={question}/>
+                        <AllQuestions post={question} />
                         ))}
                     </Col>
                     {/* <div className="topic_contianer"> */}

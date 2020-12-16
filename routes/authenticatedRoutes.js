@@ -30,8 +30,7 @@ router.post('/postComment', function(req, res, next) {
     db.Comment.create({
         comment: req.body.comment,
         QuestionId: req.body.QuestionId,
-        UserId: req.user.id,
-        parentCommentId : req.body.parentCommentId
+        UserId: req.user[0].dataValues.id
     })
     .then((dbResponse) => { res.send("Comment posted!")})
     .catch((err) => {res.status(422).json(err);});

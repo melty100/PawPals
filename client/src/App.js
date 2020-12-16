@@ -35,7 +35,7 @@ const App = () => {
             <Route exact path="/" component={HomePage} />
             <Container>
 
-              <Route exact path="/question/:id" component={QuestionPage} />
+              <Route exact path="/question/:currentQuestionId" component={QuestionPage} />
               <Route path="/profile/:profileId" component={MyProfile} exact/>
               <Route path="/myprofile" component={CurrentProfile} exact/>
               <Route path="/topic/:topic" component={TopicPage} exact/>
