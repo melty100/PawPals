@@ -52,7 +52,7 @@ const HeroSection = ({ handleSubmit, questionRef, contentRef, topicRef, currentU
                     <ImageBg src={HeroImage} />
                 </HeroBg>
                 <HeroContent>
-                    <HeroH1>Project 3</HeroH1>
+                    <HeroH1>Paw Pals</HeroH1>
                     <HeroP>Helping pet parents one paw at a time</HeroP>
                     <HeroBtnWrapper>
                         <Button to="askquestion" big='true' fontBig='true' primary='true' onMouseEnter={onHover} onMouseLeave={onHover} onClick={handleShow}>
