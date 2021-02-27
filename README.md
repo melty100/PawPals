@@ -1,5 +1,5 @@
 # Paw Pals
-![Paw Pal App Logo](https://github.com/melty100/PawPals/blob/main/public/images/homepage.PNG)
+![Paw Pal App Logo](https://github.com/melty100/PawPals/blob/master/public/images/homepage.PNG)
 ## Table of Contents
 1. [Description](#description)  
 2. [User Story](#user-story)
@@ -21,16 +21,16 @@ SO THAT I can properly take care of it.
 ## Screenshots
 
 ### Registration Page
-<img src="https://github.com/melty100/PawPals/blob/main/public/images/registerpage.PNG" width="1050" height="500" />
+<img src="https://github.com/melty100/PawPals/blob/master/public/images/registerpage.PNG" width="1050" height="500" />
 
 ### Login Page
-<img src="https://github.com/melty100/PawPals/blob/main/public/images/login.PNG" width="1050" height="500" />
+<img src="https://github.com/melty100/PawPals/blob/master/public/images/login.PNG" width="1050" height="500" />
 
 ### Home Page
-<img src="https://github.com/melty100/PawPals/blob/main/public/images/homepage.PNG" width="1050" height="500"  />
+<img src="https://github.com/melty100/PawPals/blob/master/public/images/homepage.PNG" width="1050" height="500"  />
 
 ### Questions and Topics Page
-<img src="https://github.com/melty100/PawPals/blob/main/public/images/questions.PNG" width="1050" height="500"  />
+<img src="https://github.com/melty100/PawPals/blob/master/public/images/questions.PNG" width="1050" height="500"  />
 
 ## Link
 ### Heroku
